@@ -32,7 +32,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./css/global.css" rel="stylesheet">
 <link href="./css/index.css" rel="stylesheet">
-<link href="./css/content.css">
 <title><%=pageTitle %></title>
 </head>
 <body>

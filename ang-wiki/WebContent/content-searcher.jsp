@@ -24,7 +24,8 @@
 <div class="wiki-content-wrapper">
 	<ol class="result-list">
 	<%
-	String linkURL;
+	String linkURL;	
+	if(scResult != null){
 	for(int i=1;i<=scResult.length;i++){
 		Posts outpost = scResult[i-1];		
 		linkURL = "index.jsp?title=" + outpost.getTitle();
@@ -32,7 +33,13 @@
 		<li class="result-list-item"><span><a href="<%=linkURL%>"><%=outpost.getTitle() %></a>
 		</span><span style="font-size:1rem">rev <%=outpost.getModcnt() %></span>
 		<span class="time">-<%=outpost.getModtime()==null? outpost.getWritetime():outpost.getModtime() %></span></li>
-	<%} %>
+	<%}
+	}
+	else{%>
+		<li class="result-list.item">검색 결과가 없습니다.</li>
+	<%
+	}
+	%>
 	</ol>
 </div>
 </html>

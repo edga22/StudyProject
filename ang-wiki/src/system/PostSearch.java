@@ -113,8 +113,19 @@ public class PostSearch {
 		ResultSet rs = null;	
 		
 		try{
-			con = pool.getConnection();
-			String query = "select * from tblpost where title LIKE ? order by id desc";
+			con = pool.getConnection();		
+			String query = "select count(*) from tblpost where title LIKE ? order by id desc";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, "%"+title+"%");
+			rs = pstmt.executeQuery();	
+			rs.next();
+			if(rs.getInt(1) < 1){
+				pool.freeConnection(con,pstmt,rs);
+				return null;
+			}
+			pstmt.close(); rs.close();
+			
+			query = "select * from tblpost where title LIKE ? order by id desc";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%"+title+"%");
 			rs = pstmt.executeQuery();			

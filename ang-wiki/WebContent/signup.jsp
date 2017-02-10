@@ -12,22 +12,22 @@
 <div class="login-wrapper">
 	<div class="login-inner">
 		<div class="login-sheet">
-		<form method="post" action="signupOk.jsp">
+		<form method="post" action="signupcheck.jsp">
 		<table class="table1">
 			<tr>
 				<td colspan="2" align="center">회원가입 </td>
 			</tr>
 			<tr>
-				<th scope="row">ID</th><td><input type="text" name="memberID"></td>
+				<th scope="row">ID</th><td><input type="text" name="memberID" required></td>
 			</tr>
 			<tr>
-				<th scope="row">PASSWORD</th><td><input type="password" name="memberPW"></td>
+				<th scope="row">PASSWORD</th><td><input type="password" name="memberPW" required></td>
 			</tr>
 			<tr>
 				<th scope="row">NICKNAME</th><td><input type="text" name="memberNK"></td>
 			</tr>				
 			<tr>
-				<th scope="row">E-MAIL</th><td><input type="text" name="memberEM"></td>
+				<th scope="row">E-MAIL</th><td><input type="text" name="memberEM" required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
