@@ -8,26 +8,25 @@
 <%
 	request.setCharacterEncoding("UTF-8");
 	String pageTitle = "";
-	String title = request.getParameter("title");
+	String title = request.getParameter("title"); if(title == null) title = "대문";
 	String editmod = request.getParameter("mod");
 	/*
-		에디트 모드 ( 0 = 뷰어,검색결과 / 1 = 편집 / 2 = 새글 / 3=삭제 확인)
+		에디트 모드 ( 0 = 뷰어 / 1 = 편집 / 2 = 새글 / 3 = 삭제 확인 / 4 = 검색결과)
 	*/	
 	int mod = (editmod != null)? Integer.parseInt(editmod) : 0;
 	
-	if(mod == 2) title = "새글 쓰기";
-	else if(mod == 1) title += " 수정";
-	else if(mod == 3) title += " 삭제 확인";
-	else if(title == null) title = "대문";
-	
-	if(mod == 0 && !title.equals("대문")){
-		Posts[] scResult = PostSc.getTitlePosts(title);
-		if(scResult.length != 1){}
+	if(mod == 0 && !PostSc.containsTitle(title)){
+		mod = 4;
+		Posts[] scResult = PostSc.getTitlePosts(title);		
+		session.setAttribute("Posts", scResult);
 	}
+	else if(mod == 1) title += " 수정";
+	else if(mod == 2) title = "새글 쓰기";	
+	else if(mod == 3) title += " 삭제 확인";
 	
 	
 	pageTitle = "Angel 위키 - "+title;
-	
+	String clientAddr = request.getRemoteAddr();
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -47,8 +46,7 @@
 </aside>
 <article class="wiki-article">
 <% 
-	if(mod == 0){
-%>
+	if(mod == 0){ %>
 	<jsp:include page="content-reader.jsp"></jsp:include>
 <%	}else if(mod == 1){ %>
 	<jsp:include page="content-moder.jsp"></jsp:include>
@@ -56,13 +54,15 @@
 	<jsp:include page="content-writer.jsp"></jsp:include>
 <%	}else if(mod == 3){ %>
 	<jsp:include page="content-delete.jsp"></jsp:include>	
-<%	} %>	
+<%	}else if(mod == 4){ %>
+	<jsp:include page="content-searcher.jsp"></jsp:include>	
+<%	} %>
 </article>
 
 </div>
 <div class="foot-wrapper">
 	<div class="foot">
-	<span>서버정보 : <%=application.getServerInfo() %></span>
+	<span>접속주소 : <%=clientAddr %></span><span>, 서버정보 : <%=application.getServerInfo() %></span>
 	
 	</div>
 </div>

@@ -34,7 +34,7 @@ public class PostSearch {
 				result.add(post);
 			}
 		}catch(SQLException ex){
-			System.out.println("SQLEx : "+ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Ex : "+e);
 		}finally{
@@ -69,7 +69,7 @@ public class PostSearch {
 				result.add(post);
 			}
 		}catch(SQLException ex){
-			System.out.println("SQLEx : "+ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Ex : "+e);
 		}finally{
@@ -83,6 +83,29 @@ public class PostSearch {
 		return out;
 	}
 
+	public boolean containsTitle(String title){
+		boolean havePost = false;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		
+		try{
+			con = pool.getConnection();
+			String query = "select count(*) from tblpost where title = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, title);
+			rs = pstmt.executeQuery();			
+			rs.next();
+			if(rs.getInt(1) == 1) havePost = true;			
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		return havePost;
+	}
 	public Posts[] getTitlePosts(String title){
 		ArrayList<Posts> result = new ArrayList<>();
 		Connection con = null;
@@ -103,7 +126,7 @@ public class PostSearch {
 				result.add(post);
 			}
 		}catch(SQLException ex){
-			System.out.println("SQLEx : "+ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Ex : "+e);
 		}finally{

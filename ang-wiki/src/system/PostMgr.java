@@ -83,7 +83,7 @@ public class PostMgr extends Mgr {
 			pstmt.executeUpdate();
 			writeflg = true;
 		}catch(SQLException ex){
-			System.out.println("SQL Exception : "+ ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Exception : " + e);
 		}finally{
@@ -117,7 +117,7 @@ public class PostMgr extends Mgr {
 			pstmt.executeUpdate();
 			delflag = true;
 		}catch(SQLException ex){
-			System.out.println("SQL Exception : "+ ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Exception : " + e);
 		}finally{
@@ -148,7 +148,7 @@ public class PostMgr extends Mgr {
 			post.setModtime(rs.getTimestamp(6));
 			post.setModcnt(rs.getInt(7));
 		}catch(SQLException ex){
-			System.out.println("SQLEx : "+ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Ex : "+e);
 		}finally{
@@ -208,7 +208,7 @@ public class PostMgr extends Mgr {
 			pstmt.setString(3, moder);
 			pstmt.executeUpdate();	
 		}catch(SQLException ex){
-			System.out.println("SQL Exception : "+ ex);
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
 			System.out.println("Exception : " + e);
 		}finally{
