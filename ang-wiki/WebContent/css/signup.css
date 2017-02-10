@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+.main {
+	margin-top: 100px;
+}
+.signupsheet table{		
+	margin: auto;
+	width : 440px;
+	height : 280px;
+}

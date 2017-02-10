@@ -1,0 +1,108 @@
+@CHARSET "UTF-8";
+
+html, body, th, td, input, select, textarea, button, div, p, h1, h2, h3, h4, h5, h6, a, span, li{
+	font-family: '나눔바른고딕','나눔고딕','NanumGothic','맑은고딕','Malgun Gothic',sans-serif;
+		
+}
+body {
+	margin: 0px;
+	background-color : #EFEFEF;
+}
+
+.container {
+	max-width: 1000px; 
+	margin: 0 auto;   
+}
+
+.navbar-wrapper{	
+    background-color: #00ccff;    
+	padding-left : 5px;
+	padding-right : 5px;
+	padding-top : 5px;	
+	height : 28px;
+	border-bottom : solid 1px #00bfff;
+}
+
+/*    *****************************    */
+.content-wrapper {
+	margin : 0 auto;
+	max-width: 1000px; 
+}
+
+.sidebar {
+	float : right!important;
+	width : 13rem;
+	margin : 1rem 1rem 1rem 0;
+	border : solid 1px black;
+	background-color : white;
+	padding : 3px;
+}
+.wiki-article {	
+	min-height : 200px;
+	min-width : 300px;
+	background-color : white;
+	padding : 1.5rem;
+	margin : 0 15rem 0 0;
+}
+/*    *****************************    */
+.foot-wrapper {
+	background-color : #66ff66;	
+	
+	padding : 3px 0px;
+}
+
+.foot {
+	max-width: 1000px; 
+	margin: 0 auto;
+}
+
+
+.time{
+	font-size: 0.2rem;
+	
+}
+.btn {
+	display: inline-block;
+    font-size: 0.9rem!important;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: .0625rem solid transparent;
+    padding: 0.3rem 0.7rem;
+    border-radius: 0;
+}
+.btn-small {
+	display: inline-block;
+    font-size: 0.9rem!important;
+    font-weight: 400;
+    line-height: 1.5;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    -ms-touch-action: manipulation;
+    touch-action: manipulation;
+    cursor: pointer;
+    user-select: none;
+    border: .0625rem solid transparent;
+    padding: 0.1rem 0.3rem;
+    border-radius: 0;
+    margin-top : -1px;
+}
+.btn1 {	
+    color: #fff;
+    background-color: #0275d8;
+    border-color: #0275d8;
+}
+
+.btn2 {
+	color: #373a3c;
+    background-color: #fff;
+    border-color: #ccc;
+    text-decoration: none;
+}

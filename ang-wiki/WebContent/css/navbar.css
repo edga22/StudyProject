@@ -1,0 +1,33 @@
+@CHARSET "UTF-8";
+.navbar{
+	max-width : 1000px; 
+	margin : 0 auto;
+/*	display: table-cell; */
+    vertical-align: middle;
+    font-size : 1em;
+    
+    
+}
+.navbar ul{
+	list-style-type: none;
+    list-style-position: outside;
+    list-style-image: none;
+    margin : 0px;
+    padding : 0px;
+    
+}
+
+.nav-item {
+	float : left;
+	margin-right : 0.5em;
+}
+
+.navbar a{	
+    text-decoration : none;  /* 밑줄없음 */
+    height : 30px;
+    color : white;
+}
+
+.pull-right{
+	float : right!important;
+}

@@ -1,0 +1,16 @@
+@CHARSET "UTF-8";
+.input {
+	padding: 5px;
+}
+.input:focus {
+	background-color : 	#71f471;	
+}
+
+.in-title {
+	font-size: 0.9rem;
+}
+
+.in-content {
+	width : 98%;
+	height : 25em;
+}

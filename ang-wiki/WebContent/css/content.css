@@ -1,0 +1,15 @@
+@CHARSET "UTF-8";
+
+.wiki-title {
+	font-size : 2rem;
+	font-weight : bold;
+}
+
+.wiki-btn-group {
+	padding-top: 0.1rem;
+	float : right;
+}
+
+.wiki-content-wrapper {
+	padding-top : 2rem;
+}

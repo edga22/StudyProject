@@ -1,0 +1,58 @@
+@CHARSET "UTF-8";
+.login-wrapper {
+	position:absolute;
+	display:table;
+	top:0;
+	left:0;
+	width:100%;
+	height:100%;
+}
+
+.login-inner {
+	display:table-cell;
+	text-align:center;
+	vertical-align:middle;	
+}
+
+.login-sheet {
+	display:inline-block;
+	margin-bottom: 5em;
+}
+
+table.table1{		
+	border-collapse: collapse;
+    text-align: left;
+    line-height: 1.5;
+    border-top: 1px solid #ccc;
+    border-left: 3px solid #369;
+  	margin : 20px 10px;
+	background-color : white;
+	margin: auto;
+	border-collapse : collapse;
+}
+.table1 th{
+	width: 120px;
+    padding: 10px;
+    font-weight: bold;
+    vertical-align: top;
+    color: #153d73;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}
+.table1 td{
+	width: 180px;
+    padding: 10px;
+    text-align: center;
+    border-right: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;	
+}
+.table1 input{
+	
+}
+input.reset {
+	width : 200px;
+}
+
+input.submit {
+	width : 200px;
+}
