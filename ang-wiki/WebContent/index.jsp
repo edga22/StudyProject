@@ -17,7 +17,7 @@
 	
 	if(mod == 0 && !PostSc.containsTitle(title)){
 		mod = 4;
-		Posts[] scResult = PostSc.getTitlePosts(title);		
+		Posts[] scResult = PostSc.getTitlePosts(title);	
 		session.setAttribute("Posts", scResult);
 	}
 	else if(mod == 1) title += " 수정";
