@@ -1,0 +1,12 @@
+@CHARSET "UTF-8";
+
+.result-list {
+	font-size : 1.5rem;
+	line-height : 200%;
+	vertical-align: middle;
+}
+
+.result-list-item a{
+	text-decoration : none;
+	color : blue;
+}

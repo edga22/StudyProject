@@ -18,9 +18,9 @@
 	else modTime = post.getModtime().toString();
 	
 	String modCnt = "";
-	if(post.getModcnt() == 0) modCnt = "변경 된 기록이 없습니다.";
-	else modCnt = String.valueOf(post.getModcnt());
+	modCnt = String.valueOf(post.getModcnt());
 %>
+
 <html>
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-reader.css" rel="stylesheet">
@@ -30,6 +30,7 @@
 		<form method="get" action="index.jsp">
 		<input type="hidden" name="title" value="<%=title%>">
 		<input type="hidden" name="writer" value="<%=post.getWriter() %>">
+		<button class="btn btn2" type="submit" name="rev" value="<%=(rev==0)? post.getModcnt() : rev-1 %>">이전버전</button>
 		<button class="btn btn2" type="submit" name="mod" value="1">편집</button>
 		<button class="btn btn2" type="submit" name="mod" value="3">삭제</button>
 		</form>
@@ -38,7 +39,8 @@
 		<%=title %>		
 	</span>
 	<span class="time">
-		최근 변경 시간 : <%=modTime %>, 변경 횟수 : <%=modCnt %>
+	<% if(post.getModcnt() == 0) modCnt = "변경 된 기록이 없습니다."; %>
+		최근 변경 시간 : <%=modTime %>, rev : <%=(rev==0)?modCnt : rev %>
 	</span>
 </div>
 <div class="wiki-content-wrapper">

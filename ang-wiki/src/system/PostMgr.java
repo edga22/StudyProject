@@ -9,6 +9,7 @@ abstract class Mgr {
 	abstract Posts getPost(); // 가진 객체가 없을 경우 새 객체를 만든후 저장, 리턴
 	abstract boolean readPost(String title, int rev);
 	abstract boolean modPost(String title, String content, String moder);	// 항상 읽어온 후 실행해야됨 - 읽어온 Posts 를 수정함
+	abstract Timestamp getModtime(String title, int rev);
 	
 	abstract boolean writePost(String title, String writer,String content, String tags);		
 	abstract boolean delPost(String title);
@@ -127,12 +128,38 @@ public class PostMgr extends Mgr {
 		
 		return delflag;
 	}
+	
+	public Timestamp getModtime(String title, int rev){
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		Timestamp modTime = null;
+		String query = "select modtime from tblpostmods where title = ? and modcnt = ? ";
+		try {
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, title);
+			pstmt.setInt(2, rev);
+			rs = pstmt.executeQuery();
+			rs.next();
+			modTime = rs.getTimestamp(1);			
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		
+		return modTime;
+	}
 
 	public boolean readPost(String title, int rev){		
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		boolean readflg = false;
+					
 		String query = "select * from tblPost where title = ? ";
 		try {
 			con = pool.getConnection();
@@ -154,9 +181,16 @@ public class PostMgr extends Mgr {
 		}finally{
 			pool.freeConnection(con,pstmt,rs);
 		}
+
+		String revSuffix = "";
+		if(rev != 0) {
+			revSuffix = "_"+String.valueOf(rev);
+			post.setModtime(this.getModtime(title, rev));
+		}
+
 		
 		//* 글 내용 읽기 시작  *//
-		String filename = "./post/"+title+".post";
+		String filename = "./post/"+title+revSuffix+".post";
 		try (DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)))){
 			while(dis.available() > 0){
 				post.setContent(dis.readUTF());
@@ -217,7 +251,7 @@ public class PostMgr extends Mgr {
 		//* DB 작업 끝  *//
 		
 			
-		String prevfilename = "./post/"+title+"_"+String.valueOf(modCount)+".post";
+		String prevfilename = "./post/"+title+"_"+String.valueOf(modCount+1)+".post";
 		String newfilename = "./post/"+title+".post";
 		
 		File newFile = new File(newfilename);
