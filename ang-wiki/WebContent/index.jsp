@@ -17,7 +17,7 @@
 	
 	if(mod == 0 && !PostSc.containsTitle(title)){
 		mod = 4;
-		Posts[] scResult = PostSc.getTitlePosts(title);	
+		Posts[] scResult = PostSc.getTitlePosts(title);
 		session.setAttribute("Posts", scResult);
 	}
 	else if(mod == 1) title += " 수정";
@@ -30,6 +30,8 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript" src="./js/jquery-3.1.1.js"></script>
+<script type="text/javascript" src="./js/bootstrap.min.js"></script>
 <link href="./css/global.css" rel="stylesheet">
 <link href="./css/index.css" rel="stylesheet">
 <title><%=pageTitle %></title>
@@ -56,6 +58,7 @@
 <%	}else if(mod == 4){ %>
 	<jsp:include page="content-searcher.jsp"></jsp:include>	
 <%	} %>
+
 </article>
 
 </div>

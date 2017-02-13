@@ -29,11 +29,9 @@ public class Admin extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		HttpSession session = request.getSession();
 		String memID = "";
-		if(session.getAttribute("memID")!=null)memID = (String)session.getAttribute("memID");
-		
+		if(session.getAttribute("memID")!=null)memID = (String)session.getAttribute("memID");		
 		if(memID.equals("admin")) {					
 			RequestDispatcher view = request.getRequestDispatcher("/admin/admin_home.jsp");
 			view.forward(request, response);
