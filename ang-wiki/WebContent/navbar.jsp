@@ -6,10 +6,12 @@
 	String greeting = "";
 	String loginhref = "";
 	String loginword = "";
+	boolean admin = false;
 	if(memberID != null){		
 		greeting = memberID+ "님 환영합니다";	
 		loginhref = "logout.jsp";
 		loginword = "로그아웃";
+		if(memberID.equals("admin")) admin = true;
 	}else{	
 		loginhref = "login.jsp";
 		loginword = "로그인";
@@ -24,13 +26,17 @@
 <div class="navbar">
 	<ul class="navbar nav">
 		<li class="nav-item">
-			<a class="link" href="index.jsp" >Angel위키</a>
+			<a class="link" href="index.jsp">Angel위키</a>
 		</li>
 		<li class="nav-item">
 			
 		</li>
 	</ul>
-	<ul class="navbar pull-right">
+	<ul class="navbar pull-right"><% if(admin){ %>
+		<li class="nav-item">
+			<a class="link" href="admin">관리자페이지</a>
+		</li>
+		<%} %>
 		<li class="nav-item">
 			<a class="link" href="index.jsp?mod=2">글쓰기</a>
 		</li>

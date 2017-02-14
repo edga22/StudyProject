@@ -8,6 +8,7 @@
 <!DOCTYPE html>
 <html>
 <link href="./css/global.css" rel="stylesheet">
+<link href="./css/navbar.css" rel="stylesheet">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>어드민 페이지입니다</title>
