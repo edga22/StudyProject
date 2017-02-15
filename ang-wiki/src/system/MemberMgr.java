@@ -68,7 +68,28 @@ public class MemberMgr
 	
 	public Members[] getMemberList(){
 		ArrayList<Members> result = new ArrayList<>();
-		
+		Connection con = null;
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        
+        try{
+        	con = pool.getConnection();
+        	String query = "select * from tblMember";
+        	pstmt = con.prepareStatement(query);
+        	rs = pstmt.executeQuery();
+        	rs.next();
+        	while(!rs.isLast()){
+        		Members member = new Members(rs.getString(1), rs.getString(2),
+        				rs.getString(3),rs.getString(4));
+        		result.add(member);
+        	}
+        }catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
 		
 		Members[] out = new Members[result.size()];
 		result.toArray(out);
