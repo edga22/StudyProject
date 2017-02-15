@@ -28,7 +28,7 @@
 	if(scResult != null){
 	for(int i=1;i<=scResult.length;i++){
 		Posts outpost = scResult[i-1];		
-		linkURL = "index.jsp?title=" + outpost.getTitle();
+		linkURL = "index?title=" + outpost.getTitle();
 	%>
 		<li class="result-list-item"><span><a href="<%=linkURL%>"><%=outpost.getTitle() %></a>
 		</span><span style="font-size:1rem">rev <%=outpost.getModcnt() %></span>

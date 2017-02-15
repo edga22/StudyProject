@@ -1,6 +1,7 @@
 package system;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class MemberMgr
@@ -64,4 +65,14 @@ public class MemberMgr
         }		
 		return signflg;
 	}
+	
+	public Members[] getMemberList(){
+		ArrayList<Members> result = new ArrayList<>();
+		
+		
+		Members[] out = new Members[result.size()];
+		result.toArray(out);
+		return out;
+	}
+	
 }

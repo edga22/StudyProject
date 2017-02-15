@@ -27,7 +27,7 @@
 
 <div class="wiki-title-wrapper">
 	<div class="wiki-btn-group">
-		<form method="get" action="index.jsp">
+		<form method="get" action="index">
 		<input type="hidden" name="title" value="<%=title%>">
 		<input type="hidden" name="writer" value="<%=post.getWriter() %>">
 		<button class="btn btn2" type="submit" name="rev" value="<%=(rev==0)? post.getModcnt() : rev-1 %>">이전버전</button>

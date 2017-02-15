@@ -20,7 +20,7 @@
 	alert("로그인 성공");
 </script>
 <%
-	response.sendRedirect("index.jsp?title="
+	response.sendRedirect("index?title="
 		+URLEncoder.encode((String)session.getAttribute("title"), "UTF-8"));
 	}else{
 %>

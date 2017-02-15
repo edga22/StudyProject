@@ -20,7 +20,7 @@
 %>
 	<script type="text/javascript">
 	alert("회원 가입에 성공하였습니다.");
-	location.href="index.jsp";
+	location.href="index";
 	</script>
 <%
 	}

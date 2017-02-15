@@ -21,6 +21,6 @@ if(!PostMgr.modPost(title, content, memberID)){
 	</script>		
 <%
 }
-response.sendRedirect("index.jsp?title="+URLEncoder.encode(title, "UTF-8"));
+response.sendRedirect("index?title="+URLEncoder.encode(title, "UTF-8"));
 %>
 </html>

@@ -10,7 +10,7 @@
 	String title = request.getParameter("title");
 	String writer = request.getParameter("writer");
 	String content = request.getParameter("content");
-	String url = "index.jsp?title="+URLEncoder.encode(title, "UTF-8");
+	String url = "index?title="+URLEncoder.encode(title, "UTF-8");
 	if(!PostMgr.writePost(title, writer, content, null)){
 %>
 		<script>

@@ -24,7 +24,7 @@ if((memberID!=null)?(memberID.equals(writer) || memberID.equals("admin")):false)
 		%>
 		<script>
 		alert("글삭제에 성공하였습니다.");		
-		location.replace('index.jsp');
+		location.replace('index');
 		</script>
 		<%
 	}

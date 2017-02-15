@@ -17,7 +17,7 @@
 		Posts[] recentPosts = PostSc.getRecentPosts(5);
 		for(Posts result:recentPosts){
 		%>
-			<li><a href="<%="index.jsp?title="+result.getTitle()%>">
+			<li><a href="<%="index?title="+result.getTitle()%>">
 			<%=result.getTitle() %> - 
 			<span class="time"><%=result.getWritetime().toString().substring(5) %></span></a></li>
 		<%
@@ -36,7 +36,7 @@
 		Posts[] recentMods = PostSc.getRecentMods(5);
 		for(Posts result:recentMods){
 		%>
-			<li><a href="<%="index.jsp?title="+result.getTitle()%>">
+			<li><a href="<%="index?title="+result.getTitle()%>">
 			<%=result.getTitle() %> - 
 			<span class="time"><%=result.getModtime().toString().substring(5)%></span></a></li>
 		<%
