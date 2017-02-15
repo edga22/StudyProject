@@ -1,7 +1,7 @@
-<%@page import="java.net.URLEncoder"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="system.Posts" %>
+<%@ page import="java.net.URLEncoder"%>
 <!DOCTYPE html>
 <jsp:useBean id="Postsc" class="system.PostSearch"></jsp:useBean>
 <jsp:useBean id="Postmgr" class="system.PostMgr"></jsp:useBean>
@@ -14,7 +14,6 @@
 
 <div class="admin-article">
 	<h2>게시물 관리</h2>
-	<form method="post" action="admin_delOK.jsp">
 	<table class="table1" style="font-size: 0.8rem;">
 	<tr>
 		<th>ID</th><td>제목</td><td>작성자</td><td>작성시간</td><td>최근수정</td><td>rev</td><td></td>
@@ -33,6 +32,5 @@
 		<a style="text-decoration : none;" href="index.jsp?title=<%=mgrPost[i].getTitle() %>&writer=admin&mod=3"> 삭제 </a></td>
 	</tr>
 	<%} %>
-	</table>
-	</form>
+	</table>	
 </div>

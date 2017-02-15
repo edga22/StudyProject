@@ -23,7 +23,7 @@
 	<ul class="navbar nav">
 		<li class="nav-item"><a class="link" href="index">Angel위키</a></li>
 		<li class="nav-item"><a class="link" href="admin?mod=1">게시물 관리</a></li>
-		<li class="nav-item">유저 관리</li>
+		<li class="nav-item"><a class="link" href="admin?mod=2">맴버 관리</a></li>
 	</ul>
 	<ul class="navbar pull-right">
 		<li class="nav-item"><a href="logout.jsp">로그아웃</a></li>
@@ -35,6 +35,8 @@
 	<jsp:include page="admin_summary.jsp"></jsp:include>
 <%}else if(mod == 1){ %>
 	<jsp:include page="admin_mgrpost.jsp"></jsp:include>
+<%}else if(mod == 2){ %>
+	<jsp:include page="admin_mgrmember.jsp"></jsp:include>
 <%} %>
 </div>
 </body>
