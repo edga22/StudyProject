@@ -37,7 +37,7 @@ public class Admin extends HttpServlet {
 			view.forward(request, response);
 		}
 		else{
-			response.sendRedirect("/index.jsp");
+			response.sendRedirect("/index");
 		}
 	}
 	

@@ -26,8 +26,7 @@ public class PostSearch {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, count);
 			rs = pstmt.executeQuery();			
-			while(!rs.isLast()){
-				rs.next();
+			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7));
@@ -130,8 +129,7 @@ public class PostSearch {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%"+title+"%");
 			rs = pstmt.executeQuery();			
-			while(!rs.isLast()){
-				rs.next();
+			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7));
@@ -163,8 +161,7 @@ public class PostSearch {
 			String query = "select * from tblpost order by id desc";
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();			
-			while(!rs.isLast()){
-				rs.next();
+			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7));
@@ -193,13 +190,11 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblpost order by id desc where ? = ? ";
+			String query = "select * from tblpost where "+ column +" LIKE ? order by id desc";
 			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, column);
-			pstmt.setString(2, value);
+			pstmt.setString(1, "%"+value+"%");
 			rs = pstmt.executeQuery();			
-			while(!rs.isLast()){
-				rs.next();
+			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7));
