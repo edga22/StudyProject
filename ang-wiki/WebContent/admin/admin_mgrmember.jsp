@@ -12,13 +12,14 @@
 	<h2>맴버 관리</h2>
 	<table class="table1" style="font-size: 0.8rem;">
 	<tr>
-		<th>ID</th><td>nickname</td><td>email</td>
+		<th>ID</th><td>nickname</td><td>email</td><td>가입일</td>
 	</tr>
 	<%for(int i=0;i<mgrMember.length;i++){ %>
 	<tr>
 		<th><%=mgrMember[i].getId() %></th>
 		<td><%=mgrMember[i].getNickname() %></td>
 		<td><%=mgrMember[i].getEmail() %></td>
+		<td><%=mgrMember[i].getRegisterDate() %></td>
 	</tr>
 	<%} %>
 	</table>

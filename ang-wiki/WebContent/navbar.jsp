@@ -15,10 +15,7 @@
 	}else{	
 		loginhref = "login.jsp";
 		loginword = "로그인";
-	}
-	
-	if(request.getParameter("title") != null) session.setAttribute("title", request.getParameter("title"));
-	else session.setAttribute("title", "대문");
+	}	
 %>
 <html>
 <link href="./css/global.css" rel="stylesheet">

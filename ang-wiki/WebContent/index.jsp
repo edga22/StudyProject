@@ -27,6 +27,8 @@
 	
 	pageTitle = "Angel 위키 - "+title;
 	String clientAddr = request.getRemoteAddr();
+	if(request.getParameter("title") != null) session.setAttribute("title", request.getParameter("title"));
+	else session.setAttribute("title", "대문");
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -58,14 +60,12 @@
 <%	}else if(mod == 4){ %>
 	<jsp:include page="content-searcher.jsp"></jsp:include>	
 <%	} %>
-
 </article>
 
 </div>
 <div class="foot-wrapper">
 	<div class="foot">
-	<span>접속주소 : <%=clientAddr %></span><span>, 서버정보 : <%=application.getServerInfo() %></span>
-	
+	<span>접속주소 : <%=clientAddr %></span><span>, 서버정보 : <%=application.getServerInfo() %></span>	
 	</div>
 </div>
 </body>

@@ -27,7 +27,7 @@
 				<th scope="row">NICKNAME</th><td><input type="text" name="memberNK"></td>
 			</tr>				
 			<tr>
-				<th scope="row">E-MAIL</th><td><input type="text" name="memberEM" required></td>
+				<th scope="row">E-MAIL</th><td><input type="email" name="memberEM" required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">

@@ -80,7 +80,7 @@ public class MemberMgr
         	while(!rs.isLast()){
         		rs.next();
         		Members member = new Members(rs.getString(1), rs.getString(2),
-        				rs.getString(3),rs.getString(4));
+        				rs.getString(3),rs.getString(4),rs.getTimestamp(5));
         		result.add(member);
         	}
         }catch(SQLException ex){
