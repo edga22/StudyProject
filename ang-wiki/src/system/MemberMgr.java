@@ -15,7 +15,7 @@ public class MemberMgr
 			System.out.println("Error : "+e);			
 		}
 	}
-
+	// ID와 PW 를 DB에서 확인 //
 	public boolean passCheck(String cust_id, String cust_pass){
         Connection con = null;
         PreparedStatement pstmt = null;
@@ -39,7 +39,7 @@ public class MemberMgr
         }
         return loginflg;
     }
-	
+	// 회원 가입 //
 	public boolean signUp(String id, String pw, String nick , String email){
 		boolean signflg = false;
 		Connection con = null;
@@ -65,7 +65,7 @@ public class MemberMgr
         }		
 		return signflg;
 	}
-	
+	// 모든 맴버의 목록을 얻어옵니다 //
 	public Members[] getMemberList(){
 		ArrayList<Members> result = new ArrayList<>();
 		Connection con = null;

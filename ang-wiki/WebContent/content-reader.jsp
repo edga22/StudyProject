@@ -18,7 +18,7 @@
 	else modTime = post.getModtime().toString();
 	
 	String modCnt = "";
-	modCnt = String.valueOf(post.getModcnt());
+	modCnt = String.valueOf(post.getModcnt()+1);
 %>
 
 <html>

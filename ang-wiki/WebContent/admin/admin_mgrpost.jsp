@@ -9,12 +9,16 @@
 <%
 	String column = null;
 	String value = null;
+	int viewPage = 0;
+	int totalPage = 1;
 	if(request.getParameter("column") != null) column = request.getParameter("column");
 	if(request.getParameter("value") != null) value = request.getParameter("value");
+	if(request.getParameter("page") != null) viewPage = Integer.parseInt(request.getParameter("page"));
 	
 	Posts[] mgrPost = null;
 	if(column == null || value == null)mgrPost = Postsc.getList();
 	else mgrPost = Postsc.getColumnPosts(column, value);
+	totalPage += mgrPost.length / 20;
 %>
 
 <div class="admin-article">
@@ -51,6 +55,10 @@
 	<input type="text" name="value" />
 	<button type="submit">검색</button>
 	</form>
+	</div>
+	
+	<div class="page-box" style="width: 300px; margin: 0 auto;">
+	
 	</div>
 	
 </div>

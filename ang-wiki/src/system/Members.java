@@ -8,13 +8,13 @@ public class Members {
 	private String nickname;
 	private String email;
 	private Timestamp registerDate;
-	
+	Members(){}
 	Members(String id, String passwd, String nickname, String email, Timestamp registerDate){
-		this.id = id;
-		this.passwd = passwd;
-		this.nickname = nickname;
-		this.email = email;	
-		this.registerDate = registerDate;
+		setId(id);
+		setPasswd(passwd);
+		setNickname(nickname);
+		setEmail(email);
+		setRegisterDate(registerDate);
 	}
 	public String getId() {
 		return id;

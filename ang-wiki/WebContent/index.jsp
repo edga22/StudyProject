@@ -6,16 +6,17 @@
 <html>
 
 <%
+/*	인덱스 페이지에서 대부분의 유져 서비스를 랜더링 	*/
 	request.setCharacterEncoding("UTF-8");
 	String pageTitle = "";
-	String title = request.getParameter("title"); if(title == null) title = "대문";
+	String title = request.getParameter("title"); if(title == null) title = "대문"; // 타이틀이 없으면 대문 불러오기
 	String editmod = request.getParameter("mod");
 	/*
 		에디트 모드 ( 0 = 뷰어 / 1 = 편집 / 2 = 새글 / 3 = 삭제 확인 / 4 = 검색결과)
 	*/	
 	int mod = (editmod != null)? Integer.parseInt(editmod) : 0;
 	
-	if(mod == 0 && !PostSc.containsTitle(title)){
+	if(mod == 0 && !PostSc.containsTitle(title)){	// 대문이 아닌 검색결과를 찾아올때
 		mod = 4;
 		Posts[] scResult = PostSc.getTitlePosts(title);
 		session.setAttribute("Posts", scResult);
@@ -25,8 +26,7 @@
 	else if(mod == 3) title += " 삭제 확인";
 	
 	
-	pageTitle = "Angel 위키 - "+title;
-	String clientAddr = request.getRemoteAddr();
+	pageTitle = "Angel 위키 - "+title;	
 	if(request.getParameter("title") != null) session.setAttribute("title", request.getParameter("title"));
 	else session.setAttribute("title", "대문");
 %>
@@ -64,6 +64,7 @@
 
 </div>
 <div class="foot-wrapper">
+<% String clientAddr = request.getRemoteAddr(); %>
 	<div class="foot">
 	<span>접속주소 : <%=clientAddr %></span><span>, 서버정보 : <%=application.getServerInfo() %></span>	
 	</div>

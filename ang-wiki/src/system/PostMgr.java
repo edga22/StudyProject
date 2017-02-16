@@ -9,7 +9,7 @@ abstract class Mgr {
 	abstract Posts getPost(); // 가진 객체가 없을 경우 새 객체를 만든후 저장, 리턴
 	abstract boolean readPost(String title, int rev);
 	abstract boolean modPost(String title, String content, String moder);	// 항상 읽어온 후 실행해야됨 - 읽어온 Posts 를 수정함
-	abstract Timestamp getModtime(String title, int rev);
+	abstract Timestamp getModtime(String title, int rev); // 해당 rev 의 수정 시간
 	
 	abstract boolean writePost(String title, String writer,String content, String tags);		
 	abstract boolean delPost(String title);
