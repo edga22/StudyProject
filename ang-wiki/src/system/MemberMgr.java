@@ -14,6 +14,7 @@ public class MemberMgr
 		}catch(Exception e){
 			System.out.println("Error : "+e);			
 		}
+		
 	}
 	// ID와 PW 를 DB에서 확인 //
 	public boolean passCheck(String cust_id, String cust_pass){

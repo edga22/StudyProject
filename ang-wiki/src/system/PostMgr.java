@@ -134,7 +134,7 @@ public class PostMgr extends Mgr {
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		Timestamp modTime = null;
-		String query = "select modtime from tblpostmods where title = ? and modcnt = ? ";
+		String query = "select modtime from tblPostMods where title = ? and modcnt = ? ";
 		try {
 			con = pool.getConnection();
 			pstmt = con.prepareStatement(query);

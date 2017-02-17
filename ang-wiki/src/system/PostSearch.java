@@ -22,7 +22,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblpost order by id desc limit ? ";
+			String query = "select * from tblPost order by id desc limit ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, count);
 			rs = pstmt.executeQuery();			
@@ -54,7 +54,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblpostmods order by modtime desc limit ? ";
+			String query = "select * from tblPostMods order by modtime desc limit ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, count);
 			rs = pstmt.executeQuery();			
@@ -90,7 +90,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select count(*) from tblpost where title = ? ";
+			String query = "select count(*) from tblPost where title = ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, title);
 			rs = pstmt.executeQuery();			
@@ -114,7 +114,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();		
-			String query = "select count(*) from tblpost where title LIKE ? order by id desc";
+			String query = "select count(*) from tblPost where title LIKE ? order by id desc";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%"+title+"%");
 			rs = pstmt.executeQuery();	
@@ -125,7 +125,7 @@ public class PostSearch {
 			}
 			pstmt.close(); rs.close();
 			
-			query = "select * from tblpost where title LIKE ? order by id desc";
+			query = "select * from tblPost where title LIKE ? order by id desc";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%"+title+"%");
 			rs = pstmt.executeQuery();			
@@ -158,7 +158,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblpost order by id desc";
+			String query = "select * from tblPost order by id desc";
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
@@ -190,7 +190,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblpost where "+ column +" LIKE ? order by id desc";
+			String query = "select * from tblPost where "+ column +" LIKE ? order by id desc";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, "%"+value+"%");
 			rs = pstmt.executeQuery();			

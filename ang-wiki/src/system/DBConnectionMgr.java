@@ -39,10 +39,10 @@ import java.util.Vector;
 public class DBConnectionMgr {
     @SuppressWarnings("rawtypes")
 	private Vector connections = new Vector(10);
-    private String _driver = "org.gjt.mm.mysql.Driver",
-    _url = "jdbc:mysql://127.0.0.1:3306/mywiki",
+    private String _driver = "com.mysql.jdbc.Driver",
+    _url = "jdbc:mysql://aa6impkytzgwa5.cyvwmhstynqs.ap-northeast-2.rds.amazonaws.com/ebdb?useUnicode=true&characterEncoding=UTF-8",
     _user = "root",
-    _password = "1234";
+    _password = "123456789";
     private boolean _traceOn = false;
     private boolean initialized = false;
     private int _openConnections = 10;
