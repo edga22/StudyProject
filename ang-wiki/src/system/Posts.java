@@ -14,7 +14,7 @@ public class Posts implements Cloneable{
 	private	int modcnt;
 	public Posts(){}
 	public Posts(int id, String title, String writer, String tags, Timestamp writetime
-			, String moder , Timestamp modtime, int modcnt ){
+			, String moder , Timestamp modtime, int modcnt , String content){
 		setId(id);
 		setTitle(title);
 		setWriter(writer);
@@ -23,6 +23,7 @@ public class Posts implements Cloneable{
 		setModer(moder);
 		setModtime(modtime);
 		setModcnt(modcnt);
+		setContent(content);
 	}
 	
 	@Override

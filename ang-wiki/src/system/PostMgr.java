@@ -1,6 +1,5 @@
 package system;
 
-import java.io.*;	
 import java.sql.*;
 import java.time.LocalDateTime;
 
@@ -42,7 +41,7 @@ public class PostMgr extends Mgr {
 		boolean writeflg = false;
 		int postID = 1;
 		
-		//* 새 글 내용 저장 시작  *//		
+		/* 새 글 내용 저장 시작 		!!!! 글내용 파일에 저장하던 옛날 코드 !!!!
 		String filename = "./post/"+title+".post";
 		File folder = new File("post");
 		if(!folder.exists()) 
@@ -55,7 +54,7 @@ public class PostMgr extends Mgr {
 		}catch(IOException e){
 			System.out.println("IOEx : " + e);
 		}
-		//*  새 글 내용 저장 끝  *//
+		!!!!!!!지난 코드 !!!!!!! 새 글 내용 저장 끝  */
 		
 		
 		//* DB 저장 시작  *//		
@@ -73,14 +72,15 @@ public class PostMgr extends Mgr {
 				postID = rs.getInt(1);
 			}
 			
-			query = "insert into tblPost(id, title, writer, tags, writetime)"
-					+ " values( ? , ? , ? , ? , ? )";
+			query = "insert into tblPost(id, title, writer, tags, writetime, content)"
+					+ " values( ? , ? , ? , ? , ? , ? )";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, ++postID);
 			pstmt.setString(2, title);
 			pstmt.setString(3, writer);
 			pstmt.setString(4, tags);
 			pstmt.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+			pstmt.setString(6, content);
 			pstmt.executeUpdate();
 			writeflg = true;
 		}catch(SQLException ex){
@@ -96,7 +96,7 @@ public class PostMgr extends Mgr {
 
 	public boolean delPost(String title) {
 		boolean delflag = false;
-		//* 내용 파일 삭제 시작  *//
+		/* 내용 파일 삭제 시작    !!!!!!!!!!!옛날 코드!!!!!
 		String filename = "./post/"+title+".post";
 		try {
 			File fl = new File(filename);
@@ -104,7 +104,7 @@ public class PostMgr extends Mgr {
 		}catch(Exception e){
 			System.out.println("Exception : " + e);
 		}		
-		//* 내용 파일 삭제 끝  *//
+		//* 내용 파일 삭제 끝  */
 		
 		//* DB 삭제 시작  *//
 		Connection con = null;
@@ -174,6 +174,7 @@ public class PostMgr extends Mgr {
 			post.setWritetime(rs.getTimestamp(5));
 			post.setModtime(rs.getTimestamp(6));
 			post.setModcnt(rs.getInt(7));
+			post.setContent(rs.getString(8));
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
@@ -182,14 +183,16 @@ public class PostMgr extends Mgr {
 			pool.freeConnection(con,pstmt,rs);
 		}
 
+		
+		
+		/* 글 내용 읽기 시작   !!!!!!!옛날코드
+		  
 		String revSuffix = "";
 		if(rev != 0) {
 			revSuffix = "_"+String.valueOf(rev);
 			post.setModtime(this.getModtime(title, rev));
 		}
 
-		
-		//* 글 내용 읽기 시작  *//
 		String filename = "./post/"+title+revSuffix+".post";
 		try (DataInputStream dis = new DataInputStream(new BufferedInputStream(new FileInputStream(filename)))){
 			while(dis.available() > 0){
@@ -199,7 +202,7 @@ public class PostMgr extends Mgr {
 		}catch(Exception e){
 			System.out.println("Ex : "+e);
 		}
-		//* 글 내용 읽기 끝 *//		
+		글 내용 읽기 끝 */	
 		
 		return readflg;
 	}
@@ -210,11 +213,13 @@ public class PostMgr extends Mgr {
         PreparedStatement pstmt = null;
         ResultSet rs = null;
 		boolean modflg = false;
+		String prevContent = null;
 		
 		int modCount = 0;
 		
-		//* 리비전 count 를 알아오고 Mods에 등록  *//
+		
 		try {
+			//* 리비전 count 를 알아오고 Mods에 등록  *//
             con = pool.getConnection();
 			String query = "select count(*) from tblPostMods where title = ? ";
             pstmt = con.prepareStatement(query);
@@ -225,21 +230,33 @@ public class PostMgr extends Mgr {
 			pstmt.close();
 			rs.close();
 			
+			//예전 글 내용 찾아옴
+			query = "select content from tblPost where title = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, title);
+			rs = pstmt.executeQuery();
+			rs.next();
+			prevContent = rs.getString(1);
+			pstmt.close();
+			rs.close();
+			
 			// 최근 변경 시간을 등록합니다
-			query = "update tblPost set modtime = ? , modcnt = ? where title = ? ";
+			query = "update tblPost set modtime = ? , modcnt = ? , content = ? where title = ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
 			pstmt.setInt(2, modCount+1);
-			pstmt.setString(3, title);
+			pstmt.setString(3, content);
+			pstmt.setString(4, title);
 			pstmt.executeUpdate();
 			
 			//* mods DB 에 등록합니다   *//		
-			query = "insert into tblPostMods(title, modcnt, moder)"
-					+ " values( ? , ? , ? )";
+			query = "insert into tblPostMods(title, modcnt, moder, content)"
+					+ " values( ? , ? , ? , ?)";
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, title);
 			pstmt.setInt(2, modCount+1);
 			pstmt.setString(3, moder);
+			pstmt.setString(4, prevContent);
 			pstmt.executeUpdate();	
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
@@ -251,6 +268,7 @@ public class PostMgr extends Mgr {
 		//* DB 작업 끝  *//
 		
 			
+		/* 옛날코드 파일관리
 		String prevfilename = "./post/"+title+"_"+String.valueOf(modCount+1)+".post";
 		String newfilename = "./post/"+title+".post";
 		
@@ -258,8 +276,7 @@ public class PostMgr extends Mgr {
 		File prevFile = new File(prevfilename);
 		newFile.renameTo(prevFile);
 		
-		
-		//* 새글 저장 시작  *//				
+			
 		try (DataOutputStream dos = new DataOutputStream
 				(new BufferedOutputStream(new FileOutputStream(newfilename)))){			
 			dos.writeUTF(content);
@@ -268,7 +285,7 @@ public class PostMgr extends Mgr {
 		}catch(IOException e){
 			System.out.println("IOEx : " + e);
 		}
-		//* 새글 저장 끝  *//
+		*/
 		
 		return modflg;
 	}

@@ -29,7 +29,7 @@ public class PostSearch {
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7));
+						null,rs.getTimestamp(6),rs.getInt(7), rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -65,6 +65,7 @@ public class PostSearch {
 				post.setModcnt(rs.getInt(2));
 				post.setModtime(rs.getTimestamp(3));	
 				post.setModer(rs.getString(4));
+				post.setContent(rs.getString(5));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -132,7 +133,7 @@ public class PostSearch {
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7));
+						null,rs.getTimestamp(6),rs.getInt(7),rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -164,7 +165,7 @@ public class PostSearch {
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7));
+						null,rs.getTimestamp(6),rs.getInt(7),rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -197,7 +198,7 @@ public class PostSearch {
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
 						,rs.getString(4),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7));
+						null,rs.getTimestamp(6),rs.getInt(7), rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
