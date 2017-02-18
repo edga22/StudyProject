@@ -24,7 +24,7 @@ public class MemberMgr
         boolean loginflg = false;
         try {
             con = pool.getConnection();
-			String query = "select count(*) from tblMember where id = ? and passwd = ?";
+			String query = "select count(*) from tblMember where id = ? and passwd = ? ";
             pstmt = con.prepareStatement(query);
             pstmt.setString(1,cust_id);
             pstmt.setString(2,cust_pass);
@@ -32,12 +32,12 @@ public class MemberMgr
 			rs.next();
             if(rs.getInt(1) > 0) loginflg =true;
         }catch(SQLException ex){
-        	System.out.println("SQL Exception : "+ ex);
-        }catch(Exception e) {
-            System.out.println("Exception : " + e);
-        }finally{
-             pool.freeConnection(con,pstmt,rs);
-        }
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
         return loginflg;
     }
 	// 회원 가입 //
@@ -58,13 +58,41 @@ public class MemberMgr
         	pstmt.executeUpdate();
         	signflg = true;
         }catch(SQLException ex){
-        	System.out.println("SQL Exception : "+ ex);
-        }catch(Exception e) {
-        	System.out.println("Exception : " + e);
-        }finally{
-        	pool.freeConnection(con,pstmt);
-        }		
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt);
+		}		
 		return signflg;
+	}
+	
+	public Members getMember(String ID, String PW){
+		Members result = new Members();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try{
+			con = pool.getConnection();
+			String query = "select * from tblMember where id = ? and passwd = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, ID);
+			pstmt.setString(2, PW);
+			rs = pstmt.executeQuery();
+			rs.next();
+			result.setId(ID);
+			result.setNickname(rs.getString(3));
+			result.setEmail(rs.getString(4));
+			result.setRegisterDate(rs.getTimestamp(5));
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		
+		return result;
 	}
 	// 모든 맴버의 목록을 얻어옵니다 //
 	public Members[] getMemberList(){
