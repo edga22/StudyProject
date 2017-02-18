@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("memberID");
 	String pw = request.getParameter("memberPW");
 	String nk = request.getParameter("memberNK");
