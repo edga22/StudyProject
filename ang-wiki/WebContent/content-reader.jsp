@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="system.Posts" %>
+<%@ page import="org.commonmark.node.*" import="org.commonmark.parser.Parser" import="org.commonmark.renderer.html.HtmlRenderer" %>
 <!DOCTYPE html>
 <jsp:useBean id="PostMgr" class="system.PostMgr" />
 <%
@@ -19,6 +20,13 @@
 	
 	String modCnt = "";
 	modCnt = String.valueOf(post.getModcnt()+1);
+	
+	// 파싱 부분
+	if(post.getContent() == null) post.setContent("내용이 없습니다.");
+	Parser parser = Parser.builder().build();
+	Node document = parser.parse(post.getContent());
+	HtmlRenderer renderer = HtmlRenderer.builder().build();
+	
 %>
 
 <html>
@@ -44,11 +52,6 @@
 	</span>
 </div>
 <div class="wiki-content-wrapper">
-	<%
-	String content = post.getContent();
-	if(content == null) content = "내용이 없습니다\n";
-	content = content.replaceAll("\n", "<br>");
-	%>
-	<%=content %>
+	<%=renderer.render(document) %>
 </div>
 </html>
