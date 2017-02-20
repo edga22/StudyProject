@@ -51,7 +51,7 @@
 		최근 변경 시간 : <%=modTime %>, rev : <%=(rev==0)?modCnt : rev %>
 	</span>
 </div>
-<div class="wiki-content-wrapper">
+<div id="wiki-content-wrapper">
 	<%=renderer.render(document) %>
 </div>
 </html>
