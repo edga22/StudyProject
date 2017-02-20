@@ -116,6 +116,12 @@ public class PostMgr extends Mgr {
 			pstmt = con.prepareStatement(query);
 			pstmt.setString(1, title);
 			pstmt.executeUpdate();
+			pstmt.close();
+			query = "delete from tblPostMods where title = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, title);
+			pstmt.executeUpdate();
+			
 			delflag = true;
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
