@@ -16,7 +16,7 @@ public class MemberMgr
 		}
 		
 	}
-	// ID와 PW 를 DB에서 확인 //
+	
 	public boolean passCheck(String cust_id, String cust_pass){
         Connection con = null;
         PreparedStatement pstmt = null;

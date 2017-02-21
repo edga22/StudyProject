@@ -31,7 +31,7 @@
 		<span>최근 변경된 글</span>
 	</div>
 	<div class="side-article">
-		<ul class="side-article">
+		<ul>
 		<%
 		Posts[] recentMods = PostSc.getRecentMods(5);
 		for(Posts result:recentMods){

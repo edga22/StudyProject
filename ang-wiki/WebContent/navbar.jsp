@@ -1,14 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="system.Members" %>
 <!DOCTYPE html>
 <%	
-	String memberID = (String)session.getAttribute("memID");
+	Members member = (Members)session.getAttribute("memInfo");
+	String memberID = null;
+	String nickname = null;
+	if(member != null){
+		memberID = member.getId();
+		nickname = member.getNickname();
+	}else session.setAttribute("memID", request.getRemoteAddr());
 	String greeting = "";
 	String loginhref = "";
 	String loginword = "";
+	
 	boolean admin = false;
 	if(memberID != null){		
-		greeting = memberID+ "님 환영합니다";	
+		greeting = nickname + "님 환영합니다";	
 		loginhref = "logout.jsp";
 		loginword = "로그아웃";
 		if(memberID.equals("admin")) admin = true;

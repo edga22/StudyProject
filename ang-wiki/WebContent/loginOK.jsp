@@ -13,6 +13,7 @@
 	if(request.getParameter("memberPW") != null) memberPW = request.getParameter("memberPW");
 	
 	if(memMgr.passCheck(memberID, memberPW)){
+		session.setAttribute("memInfo", memMgr.getMember(memberID, memberPW));
 		session.setAttribute("memID", memberID);
 		session.setMaxInactiveInterval(600);
 %>
