@@ -3,7 +3,7 @@
 <!DOCTYPE html>
 <html>
 <%
-	if(session.getAttribute("memID") != null){
+	if(session.getAttribute("memInfo") != null){
 		response.sendRedirect("index.jsp");
 	}
 %>
