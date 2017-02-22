@@ -16,7 +16,7 @@
 	
 	boolean admin = false;
 	if(memberID != null){		
-		greeting = nickname + "님 환영합니다";	
+		greeting = nickname;	
 		loginhref = "logout.jsp";
 		loginword = "로그아웃";
 		if(memberID.equals("admin")) admin = true;
@@ -26,39 +26,40 @@
 	}	
 %>
 <html>
-<link href="./css/global.css" rel="stylesheet">
-<link href="./css/navbar.css" rel="stylesheet">
-<div class="navbar">
-	<ul class="navbar nav">
-		<li class="nav-item">
-			<a class="link" href="index">Angel위키</a>
-		</li>
-		<li class="nav-item">
-			
-		</li>
-	</ul>
-	<ul class="navbar pull-right"><% if(admin){ %>
-		<li class="nav-item">
-			<a class="link" href="admin">관리자페이지</a>
-		</li>
-		<%} %>
-		<li class="nav-item">
-			<a class="link" href="index?mod=2">글쓰기</a>
-		</li>
-		<li class="nav-item">		
-		<form action="index" method="get">
-			<div class="search-box">
-			<input type="text" name="title" class="in-search" placeholder="Search" tabindex="1">			
-			<button id="searchBtn" class="btn-small btn2" type="submit"> 
-				<img alt="search" src="./source/search.png" height="15" width="15">
-			</button>
+<div class="container">
+	<div class="navbar-header">
+		<button type="button" class="navbar-toggle" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+		Menu
+		</button>
+		<a class="navbar-brand" href="index">Angel위키</a>
+	</div>
+	<div class="navbar-collapse collapse" id="navber">
+		<ul class="nav navbar-nav">
+			<li>
+			<% if(admin){ %>			
+			<a href="admin">관리자페이지</a>
+			<%} %>
+			</li>
+			<li>
+			<a href="index?mod=2">글쓰기</a>	
+			</li>
+			<li>				
+			<p class="navbar-text"><%=greeting %></p>
+			</li>		
+			<li>
+			<a href="<%=loginhref %>"><%=loginword %></a>		
+			</li>
+		</ul>					
+		<form class="navbar-form navbar-right" action="index" method="get">
+			<div class="form-group">
+			<input type="text" name="title" class="form-control" placeholder="Search" tabindex="1">						
 			</div>
+			<button id="searchBtn" class="btn btn-success" type="submit"> 
+				검색
+			</button>
 		</form>
-		</li>
-		<li class="nav-item">
-		<%=greeting %>
-		<a class="link" href="<%=loginhref %>"><span><%=loginword %></span></a>
-		</li>
-	</ul>
+		
+		
+	</div>	
 </div>	 		
 </html>

@@ -38,12 +38,12 @@
 		<form method="get" action="index">
 		<input type="hidden" name="title" value="<%=title%>">
 		<input type="hidden" name="writer" value="<%=post.getWriter() %>">
-		<button class="btn btn2" type="submit" name="rev" value="<%=(rev==0)? post.getModcnt() : rev-1 %>">이전버전</button>
-		<button class="btn btn2" type="submit" name="mod" value="1">편집</button>
-		<button class="btn btn2" type="submit" name="mod" value="3">삭제</button>
+		<button class="btn btn-default" type="submit" name="rev" value="<%=(rev==0)? post.getModcnt() : rev-1 %>">이전버전</button>
+		<button class="btn btn-default" type="submit" name="mod" value="1">편집</button>
+		<button class="btn btn-default" type="submit" name="mod" value="3">삭제</button>
 		</form>
 	</div>
-	<span class="wiki-title">
+	<span class="wiki-title" style="padding-top:-5px;">
 		<%=title %>		
 	</span>
 	<span class="time">

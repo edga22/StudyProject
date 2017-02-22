@@ -1,9 +1,10 @@
 @CHARSET "UTF-8";
+
 .input {
 	padding: 5px;
 }
 .input:focus {
-	background-color : 	#71f471;	
+	background-color : 	#f9f9f9;	
 }
 
 .in-title {

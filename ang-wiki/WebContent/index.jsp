@@ -33,39 +33,44 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link href="./css/global.css" rel="stylesheet">
-<link href="./css/index.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <title><%=pageTitle %></title>
 </head>
 <body>
-<div class="navbar-wrapper">
+<div class="navbar navbar-default">
 	<jsp:include page="navbar.jsp"></jsp:include>	
 </div>
 
-<div class="content-wrapper">
-<aside class="sidebar">
-	<jsp:include page="sidebar.jsp"></jsp:include>
-</aside>
-<article class="wiki-article">
-<% 
-	if(mod == 0){ %>
-	<jsp:include page="content-reader.jsp"></jsp:include>
-<%	}else if(mod == 1){ %>
-	<jsp:include page="content-moder.jsp"></jsp:include>
-<%	}else if(mod == 2){ %>
-	<jsp:include page="content-writer.jsp"></jsp:include>
-<%	}else if(mod == 3){ %>
-	<jsp:include page="content-delete.jsp"></jsp:include>	
-<%	}else if(mod == 4){ %>
-	<jsp:include page="content-searcher.jsp"></jsp:include>	
-<%	} %>
-</article>
+<div class="container">
+<div class="row">
 
+	<div class="col-md-9 col-sm-12">
+	<% 
+		if(mod == 0){ %>
+		<jsp:include page="content-reader.jsp"></jsp:include>
+	<%	}else if(mod == 1){ %>
+		<jsp:include page="content-moder.jsp"></jsp:include>
+	<%	}else if(mod == 2){ %>
+		<jsp:include page="content-writer.jsp"></jsp:include>
+	<%	}else if(mod == 3){ %>
+		<jsp:include page="content-delete.jsp"></jsp:include>	
+	<%	}else if(mod == 4){ %>
+		<jsp:include page="content-searcher.jsp"></jsp:include>	
+	<%	} %>
+	</div>
+	<div class="col-md-3">
+		<jsp:include page="sidebar.jsp"></jsp:include>
+	</div>
+	
 </div>
-<div class="foot-wrapper">
+</div>
+<footer class="foot-wrapper">
 <% String clientAddr = request.getRemoteAddr(); %>
 	<div class="foot">
 	<span>접속주소 : <%=clientAddr %></span><span>, 서버정보 : <%=application.getServerInfo() %></span>	
 	</div>
-</div>
+</footer>
+<script src="./js/jquery-3.1.1.min.js"></script>
+<script src="./js/bootstrap.js"></script>
 </body>
 </html>
