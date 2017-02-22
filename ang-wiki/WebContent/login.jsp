@@ -9,9 +9,12 @@
 %>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<link href="./css/global.css" rel="stylesheet">
+
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/login.css" rel="stylesheet">
 <title>WIKI-로그인</title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+<script src="./js/bootstrap.js"></script>
 </head>
 <body>
 <div class="login-wrapper">	
@@ -23,16 +26,16 @@
 				<td colspan="2" align="center">로그인 </td>
 			</tr>
 			<tr>
-				<th scope="row">ID</th><td><input type="text" name="memberID"></td>
+				<th scope="row">ID</th><td><input class="form-control" type="text" name="memberID"></td>
 			</tr>
 			<tr>
-				<th scope="row">PASSWORD</th><td><input type="password" name="memberPW"></td>
+				<th scope="row">PASSWORD</th><td><input class="form-control" type="password" name="memberPW"></td>
 			</tr>				
 			<tr>
 				<td colspan="2" align="center">
 				
-				<a class="btn btn2" href="signup.jsp">회원가입</a> 										
-				<button class="btn btn1" type="submit">로그인</button>
+				<a class="btn btn-primary" href="signup.jsp">회원가입</a> 										
+				<button class="btn btn-default" type="submit">로그인</button>
 				</td>
 			</tr>
 		</table>

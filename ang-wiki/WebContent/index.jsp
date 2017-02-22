@@ -38,6 +38,8 @@
 <link href="./css/global.css" rel="stylesheet">
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <title><%=pageTitle %></title>
+<script src="./js/jquery-3.1.1.min.js"></script>
+<script src="./js/bootstrap.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -73,7 +75,6 @@
 	<span>접속주소 : <%=clientAddr %></span><span>, 서버정보 : <%=application.getServerInfo() %></span>	
 	</div>
 </footer>
-<script src="./js/jquery-3.1.1.min.js"></script>
-<script src="./js/bootstrap.js"></script>
+
 </body>
 </html>
