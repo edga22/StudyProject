@@ -21,17 +21,17 @@
 	<input type="hidden" name="idx" value="<%=PostMgr.getPost().getId() %>" />
 	<div class="wiki-title-wrapper">
 		<div class="wiki-btn-group">			
-			<button class="btn btn2" type="submit" style="background-color : red">이 글을 삭제 합니다</button>			
+			<button class="btn btn-danger" type="submit">이 글을 삭제 합니다</button>			
 		</div>		
 		<span class="wiki-title">
-		<input class="input in-title" type="text" name="title" value="<%=PostMgr.getPost().getTitle() %>" />
+		<input class="form-control" style="width:20em;" type="text" name="title" value="<%=PostMgr.getPost().getTitle() %>" />
 		</span>
 		<span class="time">
 		최근 변경 시간 : <%=modTime %>
 		</span>	
 	</div>
 	<div class="wiki-content-wrapper">
-		<textarea class="input in-content" name="content"><%=PostMgr.getPost().getContent() %></textarea>
+		<textarea class="form-control" rows="30" name="content"><%=PostMgr.getPost().getContent() %></textarea>
 	</div>
 </form>
 </html>

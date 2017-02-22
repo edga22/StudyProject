@@ -11,12 +11,12 @@
 	<input type="hidden" name="writer" value="<%=memberID%>"/>
 	<div class="wiki-title-wrapper">
 		<div class="wiki-btn-group">			
-			<button class="btn btn2" type="submit" >글쓰기</button>			
+			<button class="btn btn-success" type="submit" >글쓰기</button>			
 		</div>		
-		<input class="input in-title" type="text" name="title" placeholder="글 제목" />	
+		<input class="form-control" style="width:20em;" type="text" name="title" placeholder="글 제목" />	
 	</div>
 	<div class="wiki-content-wrapper">
-		<textarea class="input in-content" name="content" placeholder=""></textarea>
+		<textarea class="form-control" rows="30" name="content" placeholder="글 내용"></textarea>
 	</div>
 </form>
 </html>
