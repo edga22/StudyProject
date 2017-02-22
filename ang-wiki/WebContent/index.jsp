@@ -40,9 +40,9 @@
 <title><%=pageTitle %></title>
 </head>
 <body>
-<div class="navbar navbar-default">
+<nav class="navbar navbar-default">
 	<jsp:include page="navbar.jsp"></jsp:include>	
-</div>
+</nav>
 
 <div class="container">
 <div class="row">

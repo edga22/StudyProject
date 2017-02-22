@@ -27,13 +27,12 @@
 %>
 <html>
 <div class="container">
-	<div class="navbar-header">
-		<button type="button" class="navbar-toggle" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-		Menu
-		</button>
+	<div class="navbar-header">		
+		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnavbar">
+		Menu<span class="caret"></span></button>		
 		<a class="navbar-brand" href="index">Angel위키</a>
 	</div>
-	<div class="navbar-collapse collapse" id="navber">
+	<div class="navbar-collapse collapse" id="mainnavbar">
 		<ul class="nav navbar-nav">
 			<li>
 			<% if(admin){ %>			
@@ -51,15 +50,13 @@
 			</li>
 		</ul>					
 		<form class="navbar-form navbar-right" action="index" method="get">
-			<div class="form-group">
-			<input type="text" name="title" class="form-control" placeholder="Search" tabindex="1">						
+			<div class="input-group">
+				<input type="text" name="title" class="form-control" placeholder="Search" tabindex="1">	
+			<div class="input-group-btn">
+				<button id="searchBtn" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
 			</div>
-			<button id="searchBtn" class="btn btn-success" type="submit"> 
-				검색
-			</button>
-		</form>
-		
-		
+			</div>
+		</form>		
 	</div>	
 </div>	 		
 </html>
