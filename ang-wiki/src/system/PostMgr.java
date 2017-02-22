@@ -181,6 +181,20 @@ public class PostMgr extends Mgr {
 			post.setModtime(rs.getTimestamp(6));
 			post.setModcnt(rs.getInt(7));
 			post.setContent(rs.getString(8));
+			pstmt.close();
+			rs.close();
+			
+			// 구버전 불러오기
+			if(rev != 0){
+				query = "select * from tblPostMods where title = ? and modcnt = ? ";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, title);
+				pstmt.setInt(2, rev);
+				rs = pstmt.executeQuery();
+				rs.next();
+				post.setContent(rs.getString(5));
+				post.setModtime(rs.getTimestamp(3));
+			}
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
@@ -188,7 +202,8 @@ public class PostMgr extends Mgr {
 		}finally{
 			pool.freeConnection(con,pstmt,rs);
 		}
-
+		
+		
 		
 		
 		/* 글 내용 읽기 시작   !!!!!!!옛날코드
