@@ -8,12 +8,15 @@
 	Members[] mgrMember = null;
 	mgrMember = MemberMgr.getMemberList();
 %>
-<div class="admin-article">
-	<h2>맴버 관리</h2>
-	<table class="table1" style="font-size: 0.8rem;">
+<h2 class="sub-header">맴버 관리</h2>
+<div class="table-responsive" style="margin-bottom: 0.5rem">
+	<table class="table table-striped">
+	<thead>
 	<tr>
 		<th>ID</th><td>nickname</td><td>email</td><td>가입일</td><td></td>
 	</tr>
+	</thead>
+	<tbody>
 	<%for(int i=0;i<mgrMember.length;i++){ %>
 	<tr>
 		<th><%=mgrMember[i].getId() %></th>
@@ -23,5 +26,6 @@
 		<td><a href="admin?mod=1&column=writer&value=<%=mgrMember[i].getId() %>">작성글 보기</a></td>
 	</tr>
 	<%} %>
+	</tbody>
 	</table>
 </div>

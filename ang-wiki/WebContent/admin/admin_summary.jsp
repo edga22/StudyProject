@@ -7,6 +7,4 @@
 <%
 	Posts[] post = Postsc.getList();
 %>
-<div class="admin-article">
- <h3>전체 게시글 수 : <%=post.length %></h3>
-</div>
+<h3>전체 게시글 수 : <%=post.length %></h3>

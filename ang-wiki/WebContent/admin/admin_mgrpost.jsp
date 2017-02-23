@@ -21,13 +21,16 @@
 	totalPage += mgrPost.length / 20;
 %>
 
-<div class="admin-article">
-	<h2>게시물 관리</h2>
-	<div class="result-table" style="margin-bottom: 0.5rem;">
-	<table class="table1" style="font-size: 0.8rem;">
+
+	<h2 class="sub-header">게시물 관리</h2>
+	<div class="table-responsive" style="margin-bottom: 0.5rem">
+	<table class="table table-striped">
+	<thead>
 	<tr>
 		<th>ID</th><td>제목</td><td>작성자</td><td>작성시간</td><td>최근수정</td><td>rev</td><td></td>
 	</tr>
+	</thead>
+	<tbody>
 	<%
 	for(int i=0;i<mgrPost.length;i++){
 	%>	
@@ -42,6 +45,7 @@
 		<a style="text-decoration : none;" href="index.jsp?title=<%=mgrPost[i].getTitle() %>&writer=admin&mod=3"> 삭제 </a></td>
 	</tr>
 	<%} %>
+	</tbody>
 	</table>
 	</div>
 	
@@ -61,4 +65,3 @@
 	
 	</div>
 	
-</div>
