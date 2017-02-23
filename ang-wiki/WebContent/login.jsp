@@ -4,17 +4,17 @@
 <html>
 <%
 	if(session.getAttribute("memInfo") != null){
-		response.sendRedirect("index.jsp");
+		response.sendRedirect("index");
 	}
 %>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/login.css" rel="stylesheet">
 <title>WIKI-로그인</title>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="./js/bootstrap.js"></script>
+
 </head>
 <body>
 <div class="login-wrapper">	
@@ -43,5 +43,7 @@
 		</div>			
 	</div>	
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="./js/bootstrap.js"></script>
 </body>
 </html>

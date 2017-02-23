@@ -2,10 +2,17 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<%
+	if(session.getAttribute("memInfo") != null){
+		response.sendRedirect("index");
+	}
+%>
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>회원 가입</title>
-<link href="./css/global.css" rel="stylesheet">
+<link href="./css/bootstrap.min.css" rel="stylesheet">
 <link href="./css/login.css" rel="stylesheet">
 </head>
 <body>
@@ -18,21 +25,21 @@
 				<td colspan="2" align="center">회원가입 </td>
 			</tr>
 			<tr>
-				<th scope="row">ID</th><td><input type="text" name="memberID" required></td>
+				<th scope="row">ID</th><td><input class="form-control" type="text" name="memberID" required></td>
 			</tr>
 			<tr>
-				<th scope="row">PASSWORD</th><td><input type="password" name="memberPW" required></td>
+				<th scope="row">PASSWORD</th><td><input class="form-control" type="password" name="memberPW" required></td>
 			</tr>
 			<tr>
-				<th scope="row">NICKNAME</th><td><input type="text" name="memberNK"></td>
+				<th scope="row">NICKNAME</th><td><input class="form-control" type="text" name="memberNK"></td>
 			</tr>				
 			<tr>
-				<th scope="row">E-MAIL</th><td><input type="email" name="memberEM" required></td>
+				<th scope="row">E-MAIL</th><td><input class="form-control" type="email" name="memberEM" required></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center">
 								 										
-				<button  class="btn btn1" type="submit">제출하기</button>				
+				<button  class="btn btn-primary" type="submit">제출하기</button>				
 				
 				</td>
 			</tr>
@@ -41,5 +48,7 @@
 		</div>
 	</div>
 </div>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="./js/bootstrap.js"></script>
 </body>
 </html>
