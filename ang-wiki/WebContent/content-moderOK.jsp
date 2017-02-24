@@ -10,15 +10,16 @@ response.setCharacterEncoding("UTF-8");
 
 String memberID = (String)session.getAttribute("memID");
 String writer = request.getParameter("writer");
-String title = (String)session.getAttribute("title"); if(title == null) title = "대문";
+String title = request.getParameter("title");
 String content = request.getParameter("content");
+String tags = request.getParameter("tags");
 
-if(!PostMgr.modPost(title, content, memberID)){
+if(!PostMgr.modPost(title, content, memberID, tags)){
 %>
 	<script>
 	alert("글수정에 실패하였습니다.");
 	history.go(-1);
-	</script>		
+	</script>
 <%
 }
 response.sendRedirect("index?title="+URLEncoder.encode(title, "UTF-8"));

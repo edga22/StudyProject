@@ -7,7 +7,7 @@ abstract class Mgr {
 	abstract void setPost(Posts post); // 만든 객체를 넣기
 	abstract Posts getPost(); // 가진 객체가 없을 경우 새 객체를 만든후 저장, 리턴
 	abstract boolean readPost(String title, int rev);
-	abstract boolean modPost(String title, String content, String moder);	// 항상 읽어온 후 실행해야됨 - 읽어온 Posts 를 수정함
+	abstract boolean modPost(String title, String content, String moder, String tags);	// 항상 읽어온 후 실행해야됨 - 읽어온 Posts 를 수정함
 	abstract Timestamp getModtime(String title, int rev); // 해당 rev 의 수정 시간
 	
 	abstract boolean writePost(String title, String writer,String content, String tags);		
@@ -228,7 +228,7 @@ public class PostMgr extends Mgr {
 		return readflg;
 	}
 	
-	public boolean modPost(String title, String content, String moder){
+	public boolean modPost(String title, String content, String moder, String tags){
 		if(post == null) return false;
 		Connection con = null;
         PreparedStatement pstmt = null;
@@ -261,13 +261,14 @@ public class PostMgr extends Mgr {
 			pstmt.close();
 			rs.close();
 			
-			// 최근 변경 시간을 등록합니다
-			query = "update tblPost set modtime = ? , modcnt = ? , content = ? where title = ? ";
+			// 최근 변경 내용을 등록합니다
+			query = "update tblPost set modtime = ? , modcnt = ? , content = ? , tags = ? where title = ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
 			pstmt.setInt(2, modCount+1);
 			pstmt.setString(3, content);
-			pstmt.setString(4, title);
+			pstmt.setString(4, tags);
+			pstmt.setString(5, title);			
 			pstmt.executeUpdate();
 			
 			//* mods DB 에 등록합니다   *//		

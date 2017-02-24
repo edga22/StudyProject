@@ -19,6 +19,10 @@
 	if(column == null || value == null)mgrPost = Postsc.getList();
 	else mgrPost = Postsc.getColumnPosts(column, value);
 	totalPage += mgrPost.length / 20;
+	
+	if(viewPage == 0){
+		viewPage = 1;
+	}
 %>
 
 

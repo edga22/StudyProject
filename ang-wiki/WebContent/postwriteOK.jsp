@@ -10,8 +10,9 @@
 	String title = request.getParameter("title");
 	String writer = request.getParameter("writer");
 	String content = request.getParameter("content");
+	String tags = request.getParameter("tags");
 	String url = "index?title="+URLEncoder.encode(title, "UTF-8");
-	if(!PostMgr.writePost(title, writer, content, null)){
+	if(!PostMgr.writePost(title, writer, content, tags)){
 %>
 		<script>
 		alert("글쓰기에 실패하였습니다.");

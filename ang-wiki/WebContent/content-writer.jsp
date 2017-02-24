@@ -13,10 +13,13 @@
 		<div class="wiki-btn-group">			
 			<button class="btn btn-success" type="submit" >글쓰기</button>			
 		</div>		
-		<input class="form-control" style="width:20em;" type="text" name="title" placeholder="글 제목" />	
+		<input class="form-control" style="width:20rem" type="text" name="title" placeholder="글 제목" />	
 	</div>
 	<div class="wiki-content-wrapper">
+		<input class="form-control" style="width:30rem" type="text" name="tags" placeholder="태그(태그1 태그2 태그3 ...)">
+		<p></p>
 		<textarea class="form-control" rows="30" name="content" placeholder="글 내용"></textarea>
 	</div>
+	<p></p>
 </form>
 </html>

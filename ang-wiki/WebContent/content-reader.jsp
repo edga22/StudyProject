@@ -54,6 +54,8 @@
 	</span>
 </div>
 <div id="wiki-content-wrapper">
+	<p>태그 : <%=post.getTags()==null?"태그가 없습니다":post.getTags() %></p>
+	<br>
 	<%=renderer.render(document) %>
 </div>
 </html>

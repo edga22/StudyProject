@@ -24,14 +24,17 @@
 			<button class="btn btn-warning" type="submit">수정하기</button>			
 		</div>		
 		<span class="wiki-title">
-		<input class="form-control" style="width:20em;" type="text" name="title" value="<%=PostMgr.getPost().getTitle() %>" />
+		<input class="form-control" style="width:20em;" type="text" name="title" value="<%=PostMgr.getPost().getTitle() %>" readonly/>
 		</span>
 		<span class="time">
 		최근 변경 시간 : <%=modTime %>
 		</span>	
 	</div>
 	<div class="wiki-content-wrapper">
+		<input class="form-control" style="width:30rem" type="text" name="tags" value="<%=PostMgr.getPost().getTags()%>">
+		<p></p>
 		<textarea class="form-control" rows="30" name="content"><%=PostMgr.getPost().getContent() %></textarea>
 	</div>
+	<p></p>
 </form>
 </html>
