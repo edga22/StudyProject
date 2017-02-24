@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="system.Posts" %>
 <%@ page import="org.commonmark.node.*" import="org.commonmark.parser.Parser" import="org.commonmark.renderer.html.HtmlRenderer" %>
-<!DOCTYPE html>
+
 <jsp:useBean id="PostMgr" class="system.PostMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -27,9 +27,11 @@
 	Node document = parser.parse(post.getContent());
 	HtmlRenderer renderer = HtmlRenderer.builder().build();
 	
+	String tags[] = null;
+
+	tags = post.getTags().split(" ");
 %>
 
-<html>
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-reader.css" rel="stylesheet">
 
@@ -54,8 +56,11 @@
 	</div>
 </div>
 <div id="wiki-content-wrapper">
-	<p>태그 : <%=post.getTags()==null?"태그가 없습니다":post.getTags() %></p>
+	<p>
+	<%for(String tag:tags){	%>
+	 <button class="btn btn-primary btn-xs"><%=tag %></button>
+	 <%} %>
+	</p>
 	<br>
 	<%=renderer.render(document) %>
 </div>
-</html>

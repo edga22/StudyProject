@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
 <%@ page import="system.Posts" %>
 <jsp:useBean id="PostMgr" class="system.PostMgr" />
 <%	
@@ -13,7 +12,6 @@
 	if(PostMgr.getPost().getModtime() == null) modTime = PostMgr.getPost().getWritetime().toString();
 	else modTime = PostMgr.getPost().getModtime().toString();
 %>
-<html>
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-writer.css" rel="stylesheet">
 <form method="post" action="content-delOK.jsp">
@@ -34,4 +32,3 @@
 		<textarea class="form-control" rows="30" name="content"><%=PostMgr.getPost().getContent() %></textarea>
 	</div>
 </form>
-</html>

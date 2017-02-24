@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="system.Members" %>
-<!DOCTYPE html>
 <%	
 	Members member = (Members)session.getAttribute("memInfo");
 	String memberID = null;
@@ -25,7 +24,6 @@
 		loginword = "로그인";
 	}	
 %>
-<html>
 <div class="container">
 	<div class="navbar-header">		
 		<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#mainnavbar">
@@ -58,5 +56,4 @@
 			</div>
 		</form>		
 	</div>	
-</div>	 		
-</html>
+</div>	 

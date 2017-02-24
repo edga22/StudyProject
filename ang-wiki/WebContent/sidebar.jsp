@@ -2,8 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="system.Posts" %>
 <jsp:useBean class="system.PostSearch" id="PostSc" />
-<!DOCTYPE html>
-<html>
+
 <head>
 <link href="./css/sidebar.css" rel="stylesheet">
 </head>
@@ -45,4 +44,3 @@
 		</ul>
 	</div>
 </div>
-</html>

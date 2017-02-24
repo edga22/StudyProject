@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="system.Posts" %>
-<!DOCTYPE html>
+
 <jsp:useBean id="PostMgr" class="system.PostMgr" />
 <%
 	request.setCharacterEncoding("UTF-8");
@@ -9,7 +9,6 @@
 	String title = (String)session.getAttribute("title");
 	
 %>
-<html>
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-searcher.css" rel="stylesheet">
 
@@ -42,4 +41,3 @@
 	%>
 	</ol>
 </div>
-</html>

@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
+
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-writer.css" rel="stylesheet">
 <% 
@@ -22,4 +21,3 @@
 	</div>
 	<p></p>
 </form>
-</html>
