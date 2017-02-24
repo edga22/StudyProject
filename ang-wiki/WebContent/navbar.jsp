@@ -43,7 +43,7 @@
 			<a href="index?mod=2">글쓰기</a>	
 			</li>
 			<li>				
-			<p class="navbar-text"><%=greeting %></p>
+			<p class="navbar-text" style="margin : 0; padding : 15px"><%=greeting %></p>
 			</li>		
 			<li>
 			<a href="<%=loginhref %>"><%=loginword %></a>		

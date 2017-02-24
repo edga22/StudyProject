@@ -18,6 +18,7 @@
 	
 <title>어드민 페이지</title>
 <link href="./css/bootstrap.min.css" rel="stylesheet" />	
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap-theme.min.css">
 <link href="./css/dashboard.css" rel="stylesheet" />
 </head>
 <body>

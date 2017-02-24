@@ -48,10 +48,10 @@
 	<span class="wiki-title" style="padding-top:-5px;">
 		<%=title %>		
 	</span>
-	<span class="time">
+	<div class="time hidden-xs">
 	<% if(post.getModcnt() == 0) modCnt = "변경 된 기록이 없습니다."; %>
 		최근 변경 시간 : <%=modTime %>, rev : <%=(rev==0)?modCnt : rev %>
-	</span>
+	</div>
 </div>
 <div id="wiki-content-wrapper">
 	<p>태그 : <%=post.getTags()==null?"태그가 없습니다":post.getTags() %></p>

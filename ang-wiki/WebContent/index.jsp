@@ -35,11 +35,12 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<link href="./css/global.css" rel="stylesheet">
+
+
 <link href="./css/bootstrap.min.css" rel="stylesheet">
+<link href="./css/global.css" rel="stylesheet">
+
 <title><%=pageTitle %></title>
-<script src="./js/jquery-3.1.1.min.js"></script>
-<script src="./js/bootstrap.js"></script>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -63,7 +64,7 @@
 		<jsp:include page="content-searcher.jsp"></jsp:include>	
 	<%	} %>
 	</div>
-	<div class="col-md-3">
+	<div class="col-md-3 hidden-xs">
 		<jsp:include page="sidebar.jsp"></jsp:include>
 	</div>
 	
@@ -76,5 +77,7 @@
 	</div>
 </footer>
 
+<script src="./js/jquery-3.1.1.min.js"></script>
+<script src="./js/bootstrap.js"></script>
 </body>
 </html>
