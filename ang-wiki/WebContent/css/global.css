@@ -1,8 +1,7 @@
 @CHARSET "UTF-8";
 
 html, body, th, td, input, select, textarea, button, div, p, h1, h2, h3, h4, h5, h6, a, span, li{
-	font-family: '나눔바른고딕','나눔고딕','NanumGothic','맑은고딕','Malgun Gothic',sans-serif;
-		
+	font-family: '나눔바른고딕','나눔고딕','NanumGothic','맑은고딕','Malgun Gothic',sans-serif;		
 }
 html,body{
 	height : 100%;

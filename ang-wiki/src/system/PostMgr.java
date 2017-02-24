@@ -262,12 +262,12 @@ public class PostMgr extends Mgr {
 			rs.close();
 			
 			// 최근 변경 내용을 등록합니다
-			query = "update tblPost set modtime = ? , modcnt = ? , content = ? , tags = ? where title = ? ";
+			query = "update tblPost set modcnt = ? , content = ? , tags = ? , moder = ? where title = ? ";
 			pstmt = con.prepareStatement(query);
-			pstmt.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now()));
-			pstmt.setInt(2, modCount+1);
-			pstmt.setString(3, content);
-			pstmt.setString(4, tags);
+			pstmt.setInt(1, modCount+1);
+			pstmt.setString(2, content);
+			pstmt.setString(3, tags);
+			pstmt.setString(4, moder);
 			pstmt.setString(5, title);			
 			pstmt.executeUpdate();
 			

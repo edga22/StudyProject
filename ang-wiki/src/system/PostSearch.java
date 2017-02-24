@@ -54,18 +54,16 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblPostMods order by modtime desc limit ? ";
+			String query = "select * from tblPost order by modtime desc limit ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, count);
 			rs = pstmt.executeQuery();			
 			while(!rs.isLast()){
 				rs.next();
-				Posts post = new Posts();
-				post.setTitle(rs.getString(1));
-				post.setModcnt(rs.getInt(2));
-				post.setModtime(rs.getTimestamp(3));	
-				post.setModer(rs.getString(4));
-				post.setContent(rs.getString(5));
+				Posts post = new Posts(rs.getInt(1), rs.getString(2), rs.getString(3), 
+						rs.getString(4), rs.getTimestamp(5), rs.getString(9), rs.getTimestamp(6),
+						rs.getInt(7), rs.getString(8));
+				
 				result.add(post);
 			}
 		}catch(SQLException ex){
