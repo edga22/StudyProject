@@ -17,7 +17,7 @@
 		
 	</div>
 	<span class="wiki-title">
-		검색결과 - <%=title %>		
+		검색결과 - 제목: <%=title %>		
 	</span>
 </div>
 <div class="wiki-content-wrapper">
@@ -30,8 +30,8 @@
 		linkURL = "index?title=" + outpost.getTitle();
 	%>
 		<li class="result-list-item"><span><a href="<%=linkURL%>"><%=outpost.getTitle() %></a>
-		</span><span style="font-size:1rem">rev <%=outpost.getModcnt() %></span>
-		<span class="time">-<%=outpost.getModtime()==null? outpost.getWritetime():outpost.getModtime() %></span></li>
+		</span>
+		<span class="time">rev <%=outpost.getModcnt() %>-<%=outpost.getModtime()==null? outpost.getWritetime():outpost.getModtime() %></span></li>
 	<%}
 	}
 	else{%>

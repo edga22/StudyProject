@@ -11,6 +11,7 @@
 	String pageTitle = "";
 	String title = request.getParameter("title"); if(title == null) title = "대문"; // 타이틀이 없으면 대문 불러오기
 	String editmod = request.getParameter("mod");
+	String tag = request.getParameter("tag");
 	/*
 		에디트 모드 ( 0 = 뷰어 / 1 = 편집 / 2 = 새글 / 3 = 삭제 확인 / 4 = 검색결과)
 	*/	
@@ -24,7 +25,9 @@
 	else if(mod == 1) title += " 수정";
 	else if(mod == 2) title = "새글 쓰기";	
 	else if(mod == 3) title += " 삭제 확인";
-	
+	else if(mod == 4 && tag != null){
+		
+	}
 	
 	pageTitle = "Angel 위키 - "+title;	
 	if(request.getParameter("title") != null) session.setAttribute("title", request.getParameter("title"));

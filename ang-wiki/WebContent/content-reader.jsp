@@ -58,7 +58,7 @@
 <div id="wiki-content-wrapper">
 	<p>
 	<%for(String tag:tags){	%>
-	 <button class="btn btn-primary btn-xs"><%=tag %></button>
+	 <a href="index?tag=<%= tag %>&mod=4" class="btn btn-primary btn-xs" ><%= tag %></a>
 	 <%} %>
 	</p>
 	<br>
