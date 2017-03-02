@@ -80,7 +80,7 @@ public class PostMgr extends Mgr {
 			pstmt.setInt(1, ++postID);
 			pstmt.setString(2, title);
 			pstmt.setString(3, writer);
-			pstmt.setString(4, tags);
+			pstmt.setString(4, "");
 			pstmt.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
 			pstmt.setString(6, content);
 			pstmt.executeUpdate();
@@ -227,7 +227,7 @@ public class PostMgr extends Mgr {
 			post.setId(rs.getInt(1));
 			post.setTitle(title);
 			post.setWriter(rs.getString(3));
-			post.setTags(rs.getString(4));
+			//post.setTags(rs.getString(4));
 			post.setWritetime(rs.getTimestamp(5));
 			post.setModtime(rs.getTimestamp(6));
 			post.setModcnt(rs.getInt(7));
@@ -345,7 +345,7 @@ public class PostMgr extends Mgr {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, modCount+1);
 			pstmt.setString(2, content);
-			pstmt.setString(3, tags);
+			pstmt.setString(3, "");
 			pstmt.setString(4, moder);
 			pstmt.setString(5, title);			
 			pstmt.executeUpdate();
@@ -412,6 +412,8 @@ public class PostMgr extends Mgr {
 			pstmt.setString(3, moder);
 			pstmt.setString(4, prevContent);
 			pstmt.executeUpdate();	
+			
+			modflg = true;
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
