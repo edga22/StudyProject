@@ -28,8 +28,7 @@
 	HtmlRenderer renderer = HtmlRenderer.builder().build();
 	
 	String tags[] = null;
-
-	tags = post.getTags().split(" ");
+	if(post.getTags() != null) tags = post.getTags().split(" ");
 %>
 
 <link href="./css/content.css" rel="stylesheet">
@@ -57,9 +56,9 @@
 </div>
 <div id="wiki-content-wrapper">
 	<p>
-	<%for(String tag:tags){	%>
+	<%if(tags!=null){for(String tag:tags){	%>
 	 <a href="index?tag=<%= tag %>&mod=4" class="btn btn-primary btn-xs" ><%= tag %></a>
-	 <%} %>
+	 <%}} %>
 	</p>
 	<br>
 	<%=renderer.render(document) %>

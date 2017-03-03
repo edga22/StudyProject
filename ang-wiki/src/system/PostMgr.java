@@ -58,7 +58,7 @@ public class PostMgr extends Mgr {
 			}
 			
 			query = "insert into tblPost(id, title, writer, writetime, content)"
-					+ " values( ? , ? , ? , ? , ? , ? )";
+					+ " values( ? , ? , ? , ? , ? )";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, ++postID);
 			pstmt.setString(2, title);
@@ -69,8 +69,7 @@ public class PostMgr extends Mgr {
 			
 			pstmt.close();
 			rs.close();
-			
-			tagmgr.submitTagPost(title, tags);			
+			if(!tags.equals("")) tagmgr.submitTagPost(title, tags);			
 			writeflg = true;
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
@@ -175,7 +174,7 @@ public class PostMgr extends Mgr {
 				rs.close();
 			}
 			String tags = tagmgr.getTags(post.getId());
-			post.setTags(tags);
+			if(tags != null) post.setTags(tags);
 			
 			readflg = true;
 		}catch(SQLException ex){
@@ -232,11 +231,9 @@ public class PostMgr extends Mgr {
         ResultSet rs = null;
 		boolean modflg = false;
 		String prevContent = null;
-		int id_post = 0;
-		
+		int id_post = 0;		
 		int modCount = 0;
-		
-		
+				
 		try {
 			//* 리비전 count 를 알아오고 Mods에 등록  *//
             con = pool.getConnection();
@@ -259,16 +256,27 @@ public class PostMgr extends Mgr {
 			id_post = rs.getInt(2);
 			pstmt.close();
 			rs.close();
-			
-			// 최근 변경 내용을 등록합니다
-			query = "update tblPost set modcnt = ? , content = ? , moder = ? where title = ? ";
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, modCount+1);
-			pstmt.setString(2, content);
-			pstmt.setString(3, moder);
-			pstmt.setString(4, title);			
-			pstmt.executeUpdate();
-			pstmt.close();
+			if(!content.equals(prevContent)){
+				// 최근 변경 내용을 등록합니다
+				query = "update tblPost set modcnt = ? , content = ? , moder = ? where title = ? ";
+				pstmt = con.prepareStatement(query);
+				pstmt.setInt(1, modCount+1);
+				pstmt.setString(2, content);
+				pstmt.setString(3, moder);
+				pstmt.setString(4, title);			
+				pstmt.executeUpdate();
+				pstmt.close();
+				
+				// mods DB 에 등록합니다   //		
+				query = "insert into tblPostMods(title, modcnt, moder, content)"
+						+ " values( ? , ? , ? , ?)";
+				pstmt = con.prepareStatement(query);
+				pstmt.setString(1, title);
+				pstmt.setInt(2, modCount+1);
+				pstmt.setString(3, moder);
+				pstmt.setString(4, prevContent);
+				pstmt.executeUpdate();	
+			}			
 			
 			// 기존 태그를 삭제합니다
 			query = "delete from tblTagPost where id_post = ? ";
@@ -277,17 +285,7 @@ public class PostMgr extends Mgr {
 			pstmt.executeUpdate();
 			pstmt.close();
 			
-			tagmgr.submitTagPost(title, tags);
-				
-			//* mods DB 에 등록합니다   *//		
-			query = "insert into tblPostMods(title, modcnt, moder, content)"
-					+ " values( ? , ? , ? , ?)";
-			pstmt = con.prepareStatement(query);
-			pstmt.setString(1, title);
-			pstmt.setInt(2, modCount+1);
-			pstmt.setString(3, moder);
-			pstmt.setString(4, prevContent);
-			pstmt.executeUpdate();	
+			tagmgr.submitTagPost(title, tags);			
 			
 			modflg = true;
 		}catch(SQLException ex){

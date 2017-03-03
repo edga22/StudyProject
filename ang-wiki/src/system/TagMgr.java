@@ -93,18 +93,20 @@ public class TagMgr {
 			while(rs.next()) id_tag.add(rs.getInt(1));
 			pstmt.close();
 			rs.close();
-			
-			query = "SELECT tagname FROM tblTags WHERE id_tag IN (";
-			String temp = "";
-			for(int i=0;i<id_tag.size();i++)temp+=", ? ";
-			temp = temp.replaceFirst(",", "");
-			temp+=")";
-			query+=temp;
-			pstmt = con.prepareStatement(query);				
-			for(int i=1;i<=id_tag.size();i++){	pstmt.setInt(i, id_tag.get(i-1));	}
-			rs = pstmt.executeQuery();
-			while(rs.next()) tagString+=" "+rs.getString(1);			
-			tagString = tagString.substring(1);
+			if(!(id_tag.size() < 1)) {
+				query = "SELECT tagname FROM tblTags WHERE id_tag IN (";
+				String temp = "";
+				for(int i=0;i<id_tag.size();i++)temp+=", ? ";
+				temp = temp.replaceFirst(",", "");
+				temp+=")";
+				query+=temp;
+				pstmt = con.prepareStatement(query);				
+				for(int i=1;i<=id_tag.size();i++){	pstmt.setInt(i, id_tag.get(i-1));	}
+				rs = pstmt.executeQuery();
+				while(rs.next()) tagString+=" "+rs.getString(1);			
+				tagString = tagString.substring(1);
+			}
+			else tagString = null;
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){

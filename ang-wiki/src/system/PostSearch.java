@@ -61,7 +61,7 @@ public class PostSearch {
 		
 		try{
 			con = pool.getConnection();
-			String query = "select * from tblPost order by modtime desc limit ? ";
+			String query = "select * from tblPost WHERE modcnt != 0 order by modtime desc limit ? ";
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, count);
 			rs = pstmt.executeQuery();			

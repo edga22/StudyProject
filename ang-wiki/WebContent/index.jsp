@@ -20,11 +20,11 @@
 	
 	if((mod == 0 && !PostSc.containsTitle(title)) || mod == 4){	// 없는 제목이거나 검색기능일때
 		mod = 4;
-		if(tag != null){
-			Posts[] scTagResult = PostSc.getTagPosts(tag);
-			session.setAttribute("TagPosts", scTagResult);
-			title = tag;
-		}
+		if(tag == null)tag = title;
+		else title = tag;
+		Posts[] scTagResult = PostSc.getTagPosts(tag);
+		session.setAttribute("TagPosts", scTagResult);
+				
 		Posts[] scResult = PostSc.getTitlePosts(title);
 		session.setAttribute("Posts", scResult);		
 	}

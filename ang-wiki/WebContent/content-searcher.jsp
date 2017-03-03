@@ -9,6 +9,7 @@
 	Posts[] scTagResult = (Posts[])session.getAttribute("TagPosts");
 	String title = (String)session.getAttribute("title");	
 	String tag = (String)session.getAttribute("tag");
+	if(tag == null)tag = title;
 %>
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-searcher.css" rel="stylesheet">

@@ -11,7 +11,7 @@
 	
 	String modTime = "";
 	if(PostMgr.getPost().getModtime() == null) modTime = PostMgr.getPost().getWritetime().toString();
-	else modTime = PostMgr.getPost().getModtime().toString();
+	else modTime = PostMgr.getPost().getModtime().toString();	
 %>
 <link href="./css/content.css" rel="stylesheet">
 <link href="./css/content-writer.css" rel="stylesheet">
@@ -30,7 +30,7 @@
 		</span>	
 	</div>
 	<div class="wiki-content-wrapper">
-		<input class="form-control" style="width:30rem" type="text" name="tags" value="<%=PostMgr.getPost().getTags()%>">
+		<input class="form-control" style="width:30rem" type="text" name="tags" value="<%=PostMgr.getPost().getTags()!=null?PostMgr.getPost().getTags():""%>">
 		<p></p>
 		<textarea class="form-control" rows="30" name="content"><%=PostMgr.getPost().getContent() %></textarea>
 	</div>
