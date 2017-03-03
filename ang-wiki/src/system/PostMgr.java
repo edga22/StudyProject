@@ -188,6 +188,42 @@ public class PostMgr extends Mgr {
 		
 		return readflg;
 	}
+	public Posts getIdPost(int id_post){
+		Posts result = null;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+					
+		String query = "select * from tblPost where id = ? ";
+		try {
+			con = pool.getConnection();
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, id_post);
+			rs = pstmt.executeQuery();
+			if(rs.next()){
+				result = new Posts();
+				result.setId(rs.getInt(1));
+				result.setTitle(rs.getString(2));
+				result.setWriter(rs.getString(3));
+				result.setWritetime(rs.getTimestamp(4));
+				result.setModtime(rs.getTimestamp(5));
+				result.setModcnt(rs.getInt(6));
+				result.setContent(rs.getString(7));
+				String tags = tagmgr.getTags(post.getId());
+				result.setTags(tags);
+			}
+			pstmt.close();
+			rs.close();		
+						
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		return result;
+	}
 	
 	public boolean modPost(String title, String content, String moder, String tags){
 		if(post == null) return false;

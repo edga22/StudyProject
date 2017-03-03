@@ -51,7 +51,8 @@
 			<div class="input-group">
 				<input type="text" name="title" class="form-control" placeholder="Search" tabindex="1">	
 			<div class="input-group-btn">
-				<button id="searchBtn" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+				<button id="searchBtn" class="btn btn-primary" type="submit" name="mod" value="4"><i class="glyphicon glyphicon-search"></i></button>
+				<button id="goBtn" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-arrow-right"></i></button>
 			</div>
 			</div>
 		</form>		

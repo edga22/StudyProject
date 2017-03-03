@@ -12,26 +12,29 @@
 	String title = request.getParameter("title"); if(title == null) title = "대문"; // 타이틀이 없으면 대문 불러오기
 	String editmod = request.getParameter("mod");
 	String tag = request.getParameter("tag");
+		
 	/*
-		에디트 모드 ( 0 = 뷰어 / 1 = 편집 / 2 = 새글 / 3 = 삭제 확인 / 4 = 검색결과)
+		에디트 모드 ( 0 = 뷰어 / 1 = 편집 / 2 = 새글 / 3 = 삭제 확인 / 4 = 검색)
 	*/	
 	int mod = (editmod != null)? Integer.parseInt(editmod) : 0;
 	
-	if(mod == 0 && !PostSc.containsTitle(title)){	// 대문이 아닌 검색결과를 찾아올때
+	if((mod == 0 && !PostSc.containsTitle(title)) || mod == 4){	// 없는 제목이거나 검색기능일때
 		mod = 4;
+		if(tag != null){
+			Posts[] scTagResult = PostSc.getTagPosts(tag);
+			session.setAttribute("TagPosts", scTagResult);
+			title = tag;
+		}
 		Posts[] scResult = PostSc.getTitlePosts(title);
-		session.setAttribute("Posts", scResult);
+		session.setAttribute("Posts", scResult);		
 	}
 	else if(mod == 1) title += " 수정";
 	else if(mod == 2) title = "새글 쓰기";	
 	else if(mod == 3) title += " 삭제 확인";
-	else if(mod == 4 && tag != null){	 //태그검색
-		
-	}
 	
-	pageTitle = "Angel 위키 - "+title;	
-	if(request.getParameter("title") != null) session.setAttribute("title", request.getParameter("title"));
-	else session.setAttribute("title", "대문");
+	session.setAttribute("title", title);
+	session.setAttribute("tag", tag);
+	pageTitle = "Angel 위키 - "+title;		
 %>
 <head>
 <meta charset="utf-8">

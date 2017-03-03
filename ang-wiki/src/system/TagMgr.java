@@ -115,4 +115,29 @@ public class TagMgr {
 		
 		return tagString;
 	}
+	
+	public int getTagID(String tagname){
+		int id_tag = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		
+		try{
+			con = pool.getConnection();		
+			String query = "select id_tag from tblTags where tagname = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, tagname);
+			rs = pstmt.executeQuery();	
+			if(rs.next()) id_tag = rs.getInt(1);
+			else id_tag = 0;
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		
+		return id_tag;
+	}
 }

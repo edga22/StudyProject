@@ -6,6 +6,7 @@ import java.util.*;
 public class PostSearch {
 	private DBConnectionMgr pool;
 	private TagMgr tagmgr;
+	private PostMgr postmgr;
 	
 	public PostSearch(){
 		try{
@@ -14,6 +15,7 @@ public class PostSearch {
 			System.out.println("Error : "+e);
 		}
 		this.tagmgr = new TagMgr();
+		this.postmgr = new PostMgr();
 	}
 	
 	public Posts[] getRecentPosts(int count){
@@ -48,13 +50,9 @@ public class PostSearch {
 			pool.freeConnection(con,pstmt,rs);
 		}
 		
-		// 배열 출력을 위한 변환부
-		Posts[] out = new Posts[result.size()];
-		result.toArray(out);
-		return out;
+		return result.toArray(new Posts[result.size()]);
 	}
 	
-	////////////////////////고쳐야됨!!!!!!!!!!!!!!!!!!!
 	public Posts[] getRecentMods(int count){
 		ArrayList<Posts> result = new ArrayList<>();
 		Connection con = null;
@@ -86,13 +84,9 @@ public class PostSearch {
 			System.out.println("Ex : "+e);
 		}finally{
 			pool.freeConnection(con,pstmt,rs);
-		}
+		}		
 		
-		// 배열 출력을 위한 변환부
-		int size = result.size();
-		Posts[] out = new Posts[size];
-		result.toArray(out);
-		return out;
+		return result.toArray(new Posts[result.size()]);
 	}
 
 	public boolean containsTitle(String title){
@@ -143,9 +137,15 @@ public class PostSearch {
 			pstmt.setString(1, "%"+title+"%");
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
-				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,tagmgr.getTags(rs.getInt(1)),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7),rs.getString(8));
+				Posts post = new Posts();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(2));
+				post.setWriter(rs.getString(3));
+				post.setWritetime(rs.getTimestamp(4));
+				post.setModtime(rs.getTimestamp(5));
+				post.setModcnt(rs.getInt(6));
+				post.setContent(rs.getString(7));
+				post.setModer(rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -155,11 +155,8 @@ public class PostSearch {
 		}finally{
 			pool.freeConnection(con,pstmt,rs);
 		}
-		
-		// 배열 출력을 위한 변환부
-		Posts[] out = new Posts[result.size()];
-		result.toArray(out);
-		return out;
+					
+		return result.toArray(new Posts[result.size()]);
 	}
 
 	public Posts[] getList(){
@@ -175,9 +172,15 @@ public class PostSearch {
 			pstmt = con.prepareStatement(query);
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
-				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,tagmgr.getTags(rs.getInt(1)),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7),rs.getString(8));
+				Posts post = new Posts();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(2));
+				post.setWriter(rs.getString(3));
+				post.setWritetime(rs.getTimestamp(4));
+				post.setModtime(rs.getTimestamp(5));
+				post.setModcnt(rs.getInt(6));
+				post.setContent(rs.getString(7));
+				post.setModer(rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -188,10 +191,7 @@ public class PostSearch {
 			pool.freeConnection(con,pstmt,rs);
 		}
 		
-		// 배열 출력을 위한 변환부
-		Posts[] out = new Posts[result.size()];
-		result.toArray(out);
-		return out;
+		return result.toArray(new Posts[result.size()]);
 	}
 	
 	public Posts[] getColumnPosts(String column, String value){
@@ -208,9 +208,15 @@ public class PostSearch {
 			pstmt.setString(1, "%"+value+"%");
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
-				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,tagmgr.getTags(rs.getInt(1)),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7), rs.getString(8));
+				Posts post = new Posts();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(2));
+				post.setWriter(rs.getString(3));
+				post.setWritetime(rs.getTimestamp(4));
+				post.setModtime(rs.getTimestamp(5));
+				post.setModcnt(rs.getInt(6));
+				post.setContent(rs.getString(7));
+				post.setModer(rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -221,8 +227,35 @@ public class PostSearch {
 			pool.freeConnection(con,pstmt,rs);
 		}
 		
-		Posts[] out = new Posts[result.size()];
-		result.toArray(out);
-		return out;
+		return result.toArray(new Posts[result.size()]);
+	}
+	
+	public Posts[] getTagPosts(String tagname){
+		ArrayList<Posts> result = new ArrayList<>();
+		
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		int id_tag = tagmgr.getTagID(tagname);
+		if(id_tag == 0) return null;
+		
+		try{
+			con = pool.getConnection();
+			String query = "select id_post from tblTagPost where id_tag = ?";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, id_tag);
+			rs = pstmt.executeQuery();			
+			while(rs.next()){
+				result.add(postmgr.getIdPost(rs.getInt(1)));
+			}
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		
+		return result.toArray(new Posts[result.size()]);
 	}
 }
