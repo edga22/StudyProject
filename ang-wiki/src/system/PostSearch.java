@@ -69,10 +69,15 @@ public class PostSearch {
 			rs = pstmt.executeQuery();			
 			while(!rs.isLast()){
 				rs.next();
-				Posts post = new Posts(rs.getInt(1), rs.getString(2), rs.getString(3), 
-						tagmgr.getTags(rs.getInt(1)), rs.getTimestamp(5), rs.getString(9), rs.getTimestamp(6),
-						rs.getInt(7), rs.getString(8));
-				
+				Posts post = new Posts();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(2));
+				post.setWriter(rs.getString(3));
+				post.setWritetime(rs.getTimestamp(4));
+				post.setModtime(rs.getTimestamp(5));
+				post.setModcnt(rs.getInt(6));
+				post.setContent(rs.getString(7));
+				post.setModer(rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
