@@ -25,7 +25,7 @@
 	else if(mod == 1) title += " 수정";
 	else if(mod == 2) title = "새글 쓰기";	
 	else if(mod == 3) title += " 삭제 확인";
-	else if(mod == 4 && tag != null){
+	else if(mod == 4 && tag != null){	 //태그검색
 		
 	}
 	

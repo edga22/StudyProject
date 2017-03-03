@@ -5,6 +5,7 @@ import java.util.*;
 
 public class PostSearch {
 	private DBConnectionMgr pool;
+	private TagMgr tagmgr;
 	
 	public PostSearch(){
 		try{
@@ -12,6 +13,7 @@ public class PostSearch {
 		}catch(Exception e){
 			System.out.println("Error : "+e);
 		}
+		this.tagmgr = new TagMgr();
 	}
 	
 	public Posts[] getRecentPosts(int count){
@@ -27,9 +29,15 @@ public class PostSearch {
 			pstmt.setInt(1, count);
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
-				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,rs.getString(4),rs.getTimestamp(5),
-						null,rs.getTimestamp(6),rs.getInt(7), rs.getString(8));
+				Posts post = new Posts();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(2));
+				post.setWriter(rs.getString(3));
+				post.setWritetime(rs.getTimestamp(4));
+				post.setModtime(rs.getTimestamp(5));
+				post.setModcnt(rs.getInt(6));
+				post.setContent(rs.getString(7));
+				post.setModer(rs.getString(8));
 				result.add(post);
 			}
 		}catch(SQLException ex){
@@ -46,6 +54,7 @@ public class PostSearch {
 		return out;
 	}
 	
+	////////////////////////고쳐야됨!!!!!!!!!!!!!!!!!!!
 	public Posts[] getRecentMods(int count){
 		ArrayList<Posts> result = new ArrayList<>();
 		Connection con = null;
@@ -61,7 +70,7 @@ public class PostSearch {
 			while(!rs.isLast()){
 				rs.next();
 				Posts post = new Posts(rs.getInt(1), rs.getString(2), rs.getString(3), 
-						rs.getString(4), rs.getTimestamp(5), rs.getString(9), rs.getTimestamp(6),
+						tagmgr.getTags(rs.getInt(1)), rs.getTimestamp(5), rs.getString(9), rs.getTimestamp(6),
 						rs.getInt(7), rs.getString(8));
 				
 				result.add(post);
@@ -130,7 +139,7 @@ public class PostSearch {
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,rs.getString(4),rs.getTimestamp(5),
+						,tagmgr.getTags(rs.getInt(1)),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7),rs.getString(8));
 				result.add(post);
 			}
@@ -162,7 +171,7 @@ public class PostSearch {
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,rs.getString(4),rs.getTimestamp(5),
+						,tagmgr.getTags(rs.getInt(1)),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7),rs.getString(8));
 				result.add(post);
 			}
@@ -195,7 +204,7 @@ public class PostSearch {
 			rs = pstmt.executeQuery();			
 			while(rs.next()){				
 				Posts post = new Posts(rs.getInt(1),rs.getString(2),rs.getString(3)
-						,rs.getString(4),rs.getTimestamp(5),
+						,tagmgr.getTags(rs.getInt(1)),rs.getTimestamp(5),
 						null,rs.getTimestamp(6),rs.getInt(7), rs.getString(8));
 				result.add(post);
 			}
