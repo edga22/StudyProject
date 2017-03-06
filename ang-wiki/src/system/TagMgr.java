@@ -142,4 +142,28 @@ public class TagMgr {
 		
 		return id_tag;
 	}
+	
+	public int cntTagID(int id_tag){
+		int cntTag = 0;
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		
+		try{
+			con = pool.getConnection();		
+			String query = "select count(*) from tblTagPost where id_tag = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, id_tag);
+			rs = pstmt.executeQuery();	
+			if(rs.next()) cntTag = rs.getInt(1);
+			
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}
+		return cntTag;
+	}
 }

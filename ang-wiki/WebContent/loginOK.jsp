@@ -8,9 +8,11 @@
 	request.setCharacterEncoding("UTF-8");
 	String memberID = "";
 	String memberPW = "";
+	String title = "대문";
 	
 	if(request.getParameter("memberID") != null) memberID = request.getParameter("memberID");
 	if(request.getParameter("memberPW") != null) memberPW = request.getParameter("memberPW");
+	if(session.getAttribute("title") != null) title = (String)session.getAttribute("title");
 	
 	if(memMgr.passCheck(memberID, memberPW)){
 		session.setAttribute("memInfo", memMgr.getMember(memberID, memberPW));
@@ -22,7 +24,7 @@
 </script>
 <%
 	response.sendRedirect("index?title="
-		+URLEncoder.encode((String)session.getAttribute("title"), "UTF-8"));
+		+URLEncoder.encode(title, "UTF-8"));
 	}else{
 %>
 <script>

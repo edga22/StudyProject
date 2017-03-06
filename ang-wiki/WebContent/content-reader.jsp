@@ -46,7 +46,7 @@
 		</div>
 		</form>
 	</div>
-	<span class="wiki-title" style="padding-top:-5px;">
+	<span class="wiki-title" style="padding-top:-5px; font-size:3rem;">
 		<%=title %>		
 	</span>
 	<div class="time hidden-xs">
