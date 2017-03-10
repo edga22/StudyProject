@@ -1,7 +1,7 @@
 package system;
 
 import java.sql.*;
-import java.util.ArrayList;
+import java.util.*;
 
 public class TagMgr {
 	private DBConnectionMgr pool;
@@ -12,6 +12,33 @@ public class TagMgr {
 		}catch(Exception e){
 			System.out.println("Error : "+e);
 		}
+	}
+	public TagSet[] getTagList(){
+		ArrayList<TagSet> resultList = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;		
+		String query = "";
+		try{
+			con = pool.getConnection();
+			query = "SELECT id_tag, tagname "
+					+ "FROM tblTags";
+			pstmt = con.prepareStatement(query);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				resultList.add(new TagSet(rs.getString(2), cntTagID(rs.getInt(1))));
+			}
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Exception : " + e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}	
+		
+		TagSet[] result = new TagSet[resultList.size()];
+		resultList.toArray(result);
+		return result;
 	}
 	
 	public boolean submitTagPost(String title, String tags){
@@ -82,11 +109,12 @@ public class TagMgr {
 		Connection con = null;
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;		
-		String query = "";
-		ArrayList<Integer> id_tag = new ArrayList<>();
+		String query = "";		
 		String tagString = "";
 		try{
 			con = pool.getConnection();
+			/* select 3회 소스
+			ArrayList<Integer> id_tag = new ArrayList<>();
 			pstmt = con.prepareStatement("select id_tag from tblTagPost where id_post = ? ");
 			pstmt.setInt(1, id_post);
 			rs = pstmt.executeQuery();
@@ -105,8 +133,16 @@ public class TagMgr {
 				rs = pstmt.executeQuery();
 				while(rs.next()) tagString+=" "+rs.getString(1);			
 				tagString = tagString.substring(1);
-			}
-			else tagString = null;
+				}
+			*/
+			query = "SELECT t.tagname FROM tblPost p, tblTagPost tp, tblTags t"
+					+ " WHERE p.id = tp.id_post AND tp.id_tag = t.id_tag AND p.id = ? ";
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, id_post);
+			rs= pstmt.executeQuery();
+			while(rs.next()) tagString+=" "+rs.getString(1);
+			if(tagString.equals("")) tagString = null;
+			else tagString = tagString.substring(1);
 		}catch(SQLException ex){
 			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
 		}catch(Exception e){
@@ -166,4 +202,6 @@ public class TagMgr {
 		}
 		return cntTag;
 	}
+
+	
 }

@@ -18,7 +18,44 @@ public class PostSearch {
 		this.postmgr = new PostMgr();
 	}
 	
+	private Posts[] _getQueryPosts(String query, int count){
+		ArrayList<Posts> result = new ArrayList<>();
+		Connection con = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;	
+		
+		try{
+			con = pool.getConnection();			
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, count);
+			rs = pstmt.executeQuery();			
+			while(rs.next()){				
+				Posts post = new Posts();
+				post.setId(rs.getInt(1));
+				post.setTitle(rs.getString(2));
+				post.setWriter(rs.getString(3));
+				post.setWritetime(rs.getTimestamp(4));
+				post.setModtime(rs.getTimestamp(5));
+				post.setModcnt(rs.getInt(6));
+				post.setContent(rs.getString(7));
+				post.setModer(rs.getString(8));
+				String tags = tagmgr.getTags(post.getId());
+				if(tags != null) post.setTags(tags);
+				result.add(post);
+			}
+		}catch(SQLException ex){
+			System.out.println(new Exception().getStackTrace()[0].getMethodName()+"\n"+"SQLEx : "+ex);
+		}catch(Exception e){
+			System.out.println("Ex : "+e);
+		}finally{
+			pool.freeConnection(con,pstmt,rs);
+		}		
+		return result.toArray(new Posts[result.size()]);
+	}
+	
 	public Posts[] getRecentPosts(int count){
+		return _getQueryPosts("select * from tblPost order by id desc limit ? ", count);
+		/*
 		ArrayList<Posts> result = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -51,9 +88,25 @@ public class PostSearch {
 		}
 		
 		return result.toArray(new Posts[result.size()]);
+		*/
+	}
+	
+	public Posts[] getNoTagPosts(int count){
+		String query = "SELECT * "
+				+ "FROM tblPost p "
+				+ "WHERE p.id not IN "
+				+ "(SELECT distinct p.id "
+				+ "FROM tblPost p, tblTagPost tp "
+				+ "WHERE p.id = tp.id_post) "
+				+ "LIMIT ? ";
+		return _getQueryPosts(query, count);
 	}
 	
 	public Posts[] getRecentMods(int count){
+		String query = "select * from tblPost WHERE modcnt != 0 order by modtime desc limit ? ";
+		return _getQueryPosts(query, count);
+		
+		/*
 		ArrayList<Posts> result = new ArrayList<>();
 		Connection con = null;
 		PreparedStatement pstmt = null;
@@ -87,6 +140,7 @@ public class PostSearch {
 		}		
 		
 		return result.toArray(new Posts[result.size()]);
+		*/
 	}
 
 	public boolean containsTitle(String title){

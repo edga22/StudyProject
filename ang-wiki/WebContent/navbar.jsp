@@ -40,14 +40,20 @@
 			<li>
 			<a href="index?mod=2">글쓰기</a>	
 			</li>
+			<li>
+			<a href="taglist.jsp">태그목록</a>
+			</li>
+		</ul>	
+		<div class="navbar-right">
+		<ul class="nav navbar-nav">
 			<li>				
 			<p class="navbar-text" style="margin : 0; padding : 15px"><%=greeting %></p>
 			</li>		
 			<li>
 			<a href="<%=loginhref %>"><%=loginword %></a>		
 			</li>
-		</ul>					
-		<form class="navbar-form navbar-right" action="index" method="get">
+			<li>
+			<form class="navbar-form" action="index" method="get">
 			<div class="input-group">
 				<input type="text" name="title" class="form-control" placeholder="Search" tabindex="1">	
 			<div class="input-group-btn">
@@ -55,6 +61,9 @@
 				<button id="goBtn" class="btn btn-success" type="submit"><i class="glyphicon glyphicon-arrow-right"></i></button>
 			</div>
 			</div>
-		</form>		
+			</form>		
+			</li>
+		</ul>		
+		</div>	
 	</div>	
 </div>	 

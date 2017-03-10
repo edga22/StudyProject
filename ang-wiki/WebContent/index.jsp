@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <jsp:useBean id="PostSc" class="system.PostSearch"></jsp:useBean>
 <html>
-
 <%
 /*	인덱스 페이지에서 대부분의 유져 서비스를 랜더링 	*/
 	request.setCharacterEncoding("UTF-8");
@@ -83,7 +82,10 @@
 	</div>
 </footer>
 
-<script src="./js/jquery-3.1.1.min.js"></script>
-<script src="./js/bootstrap.js"></script>
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </body>
 </html>

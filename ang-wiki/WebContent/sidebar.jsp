@@ -44,3 +44,22 @@
 		</ul>
 	</div>
 </div>
+<div class="side-content">	
+	<div class="side-title">
+		<span>태그가 없는 글</span>
+	</div>
+	<div class="side-article">
+		<ul>
+		<%
+		Posts[] noTagPosts = PostSc.getNoTagPosts(5);
+		for(Posts result:noTagPosts){
+		%>
+			<li><a href="<%="index?title="+result.getTitle()%>">
+			<%=result.getTitle() %> - 
+			<span class="time"><%=result.getWritetime().toString().substring(5) %></span></a></li>
+		<%
+		}
+		%>
+		</ul>
+	</div>
+</div>
